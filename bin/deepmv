@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+# Usage: deepmv '**/*.rb' ../other
+#
+# Moves files under the current directory matching a glob
+# to another directory, preserving directory structure.
+
+require 'fileutils'
+
+glob = ARGV.shift
+dest = ARGV.shift
+
+Dir.glob(glob) do |f|
+  destfile = File.join(dest, f)
+  FileUtils.mkdir_p File.dirname(destfile), verbose: true
+  FileUtils.mv f, destfile, verbose: true
+end

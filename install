@@ -1,0 +1,91 @@
+#!/usr/bin/env zsh -r -x -v -e
+
+# What's the one that forces variables to be defined?
+
+# Create .dotfiles symlink? (should this be elsewhere?)
+
+# Detect OS, machine, user, dreamhost, etc
+# Work vs home?
+# remove ".local", etc
+
+# Install dotfiles!
+
+# Concatenate dotfiles? includes? substitutions?
+
+# Copy symlinks
+
+# TODO: dotfiles instead of .dotfiles?
+
+DOTFILES_PATH=$PWD
+SHORTHOST=${HOST/\.local/}
+# OS detection, default to Linux
+case $(uname) in
+    FreeBSD)   OS=FreeBSD ;;
+    DragonFly) OS=FreeBSD ;;
+    OpenBSD)   OS=OpenBSD ;;
+    Darwin)    OS=Darwin  ;;
+    SunOS)     OS=SunOS   ;;
+    *)         OS=Linux   ;;
+esac
+
+# for x in y?
+ln -s -f "$DOTFILES_PATH/ackrc" ~/.ackrc
+mkdir -p ~/.bundle/
+ln -s -f "$DOTFILES_PATH/bundle_config" ~/.bundle/config
+rm -f ~/.emacs
+rm -f ~/.emacs.d
+ln -s -F "$DOTFILES_PATH/emacs.d" ~/.emacs.d
+ln -s -f "$DOTFILES_PATH/gemrc" ~/.gemrc
+ln -s -f "$DOTFILES_PATH/gitconfig" ~/.gitconfig
+ln -s -f "$DOTFILES_PATH/zshrc" ~/.zshrc
+ln -s -f "$DOTFILES_PATH"/bin/* ~/bin
+
+# bin/emacs and bin/ec are only for OS X!
+if [ "$OS" != Darwin ]; then
+    rm -f ~/bin/emacs
+    rm -f ~/bin/ec
+fi
+
+# Copy based on OS/machine
+if [ -f "$DOTFILES_PATH/emacs.$SHORTHOST" ]; then
+    ln -s -f "$DOTFILES_PATH/emacs.$SHORTHOST" ~/.emacs.local
+fi
+
+# Delete any broken symlinks
+rm -f ~/bin/*(-@D) || echo "No broken symlinks in ~/bin"
+rm -f ~/*(-@D) || echo "No broken symlinks in ~"
+
+# if Mac, suppress login thing
+touch ~/.hushlogin
+
+# Subfolders or prefixes per machine?
+
+# zcompile?
+# emacs byte compile
+#emacs --batch --eval "(byte-recompile-directory \"~/.emacs.d\" 0 1)"
+#emacs --batch --eval "(byte-compile-file \"~/.emacs\")"
+
+# on mac, write prefs? customizations.txt? Brewfile?
+
+# apply patches??
+
+# How to handle things like SSH keys, .gem/credentials, netrc, .relish, .gitconfig etc?
+
+# Update submodules
+git submodule update --init --recursive
+
+# TODO Homebrew on OSX
+# if osx:
+which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor || echo "Pay attention to these errors!"
+brew update
+which ack || brew install ack
+which node || brew install node
+which wget || brew install wget
+
+# rvm, ruby, python
+# cask?
+
+# TODO: npm installs, gem installs, etc
+# gem install rubocop
+# npm install -g tern

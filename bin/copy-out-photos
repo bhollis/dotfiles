@@ -1,0 +1,7 @@
+#!/bin/sh
+
+SOURCE_PATH=~/Pictures/Photos\ Library.photoslibrary/Masters/
+DEST_PATH=~/Pictures/Lightroom/Import
+TOUCH_FILE="$DEST_PATH"/last-import
+
+(find "$SOURCE_PATH" -type f -newer "$TOUCH_FILE" -exec ln {} "$DEST_PATH" \;) && touch "$TOUCH_FILE"

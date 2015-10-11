@@ -1,0 +1,41 @@
+[user]
+  name = Ben Hollis
+  email = ben@benhollis.net
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+
+[branch]
+  autosetuprebase = always
+
+[core]
+  autocrlf = input
+  excludesFile = ~/.dotfiles/gitignore_global
+
+[diff]
+  algorithm = histogram
+
+[alias]
+  amend = commit --amend
+  wdiff = diff --color-words
+  s = status
+  stat = diff --stat
+  # Wait how do aliases work
+  track = branch --set-upstream-to
+  b = branch -v
+  p = pull --rebase
+  merged = branch --merged
+
+# Credentials live elsewhere
+[include]
+    path = ~/.gitconfig.github
+
+[credential]
+  helper = osxkeychain
+[push]
+  default = upstream
+[advice]
+  statusHints = false

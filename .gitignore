@@ -1,0 +1,9 @@
+emacs.d/.emacs.desktop*
+emacs.d/auto-save-list/*
+emacs.d/url
+emacs.d/recentf*
+emacs.d/.mc-lists.el
+.gitconfig.github
+\#*\#
+*~
+.DS_Store

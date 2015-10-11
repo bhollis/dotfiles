@@ -1,0 +1,56 @@
+#!/bin/bash -e
+
+echo "Remove trailing whitespace"
+ruby -i -pe 'sub /\s+\n$/, "\n"' **/*.cpp **/*.h
+
+echo "Tabs to spaces"
+ruby -i -pe 'gsub /\t/, "    "' **/*.cpp **/*.h
+
+echo "Single space after inline comments"
+ruby -i -pe 'sub /(?<!http:|https:|abra:)\/\/(\w)/, "// \\1"' **/*.cpp **/*.h
+
+echo "Braces on same line"
+ruby -i -e 'while f = gets(nil) do puts f.gsub(/([^;\s])\s*\n\s*{/, "\\1 {") end' **/*.cpp **/*.h
+
+echo "Space around inherit colon"
+ruby -i -pe 'sub /\):([^:\s])/, ") : \\1"' **/*.cpp **/*.h
+
+echo "Too much space before brace"
+ruby -i -pe 'sub /\)\s+{/, ") {"' **/*.cpp **/*.h
+
+echo "Tight braces"
+ruby -i -pe 'gsub /{([^\s])/, "{ \\1"' **/*.cpp **/*.h
+ruby -i -pe 'gsub /([^\s])}/, "\\1 }"' **/*.cpp **/*.h
+ruby -i -pe 'gsub /([^\s]){/, "\\1 {"' **/*.cpp **/*.h
+ruby -i -pe 'gsub /{ }/, "{}"' **/*.cpp **/*.h
+
+echo "if formatting"
+ruby -i -pe 'sub /if\s*\(\s*(.*?)\s*\) {/, "if (\\1) {"' **/*.cpp **/*.h
+
+echo "while formatting"
+ruby -i -pe 'sub /while\s*\(\s*(.*?)\s*\) {/, "while (\\1) {"' **/*.cpp **/*.h
+
+echo "for-matting"
+ruby -i -e 'while f = gets(nil) do puts f.gsub /for\s*\(\s*(.*?)\s*;\s*(.*?)\s*;\s*(.*?)\s*\) {/m, "for (\\1; \\2; \\3) {" end' **/*.cpp **/*.h
+
+echo "refix empty for"
+ruby -i -pe 'sub /for \(; ; \) {/, "for (;;) {"' **/*.cpp **/*.h
+
+echo "Preincrement in loops"
+ruby -i -pe 'sub /; (\w+)\+\+/, "; ++\\1"' **/*.cpp **/*.h
+
+echo "Align initializers"
+ruby -i -e 'while f = gets(nil) do puts f.gsub(/\)\s*:\s*([^"{]+)\s*{/m) {|m| ") :\n        " + $1.split(/\)\s*?,/).map(&:strip).join("),\n        ") + " {"} end' **/*.cpp **/*.h
+
+echo "Align long parameter lists"
+ruby -i -e 'while f = gets(nil) do puts f.gsub(/\(([^\)]*?)\)(( const)? {)/m) {|m| args = $1; all = $&; tail = $2; args.gsub(/\s+/, " ").length > 80 ? ("(\n            " + args.split(/(?<!<std::string),/).map(&:strip).join(",\n            ") + ")" + tail) : all } end' **/*.cpp **/*.h
+
+echo "Align else"
+ruby -i -e 'while f = gets(nil) do puts f.gsub(/}\n\s*else {/, "} else {") end' **/*.cpp **/*.h
+
+
+#Echo "use empty()"
+#ruby -i -pe 'sub /size\(\) == 0/, "empty()"' **/*.cpp **/*.h
+
+#echo "remove empty virtual destructors"
+#ruby -i -ne 'puts $_ unless $_ =~ /virtual ~.*?{\s*}/' **/*.h
