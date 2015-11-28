@@ -157,7 +157,6 @@
 ;; expand, or C-c y to bring up a company-mode list of available
 ;; snippets. Install snippets from yasnippet-snippets as a submodule,
 ;; or add your own!
-;; TODO: <tab> might be too aggressive a keybinding. Bind to something else?
 (use-package yasnippet
   :diminish yas-minor-mode
   :init
@@ -166,10 +165,10 @@
     "~/.emacs.d/yasnippets" ;; https://github.com/AndreaCrotti/yasnippet-snippets
     ))
   :config
-  ;; Use something other than tab
-  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; (define-key yas-minor-mode-map (kbd "<the new key>") 'yas-expand)
+  ;; Use C-; for expand instead of tab
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
   ;; Can restrict to certain modes with:
   ;; (yas-reload-all)
   ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
