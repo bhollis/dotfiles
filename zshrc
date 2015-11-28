@@ -1,4 +1,3 @@
-# TODO: emacs-fu to make this auto shell-script-moe?
 # TODO: Warning (emacs): You appear to be setting environment variables in your .bashrc or .zshrc: those files are only read by interactive shells, so you should instead set environment variables in startup files like .bash_profile or .zshenv.  See the man page for your shell for more info.  In future, exec-path-from-shell will not read variables set in the wrong files.
 # zsh startup
 
@@ -38,9 +37,12 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^E" end-of-line
 bindkey "^A" beginning-of-line
 
-# TODO: bind to ctrl-< and ctrl->
-#bindkey '^[^[[D' backward-word
-#bindkey '^[^[[C' forward-word
+# bind to ctrl-< and ctrl-> to move back and forth by word, just like
+# in emacs
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
+autoload -U select-word-style
+select-word-style bash # Use bash style words that stop on path separators
 # pushes current command on command stack and gives blank line, after that line runs command stack is popped
 bindkey "^T" push-line-or-edit
 
