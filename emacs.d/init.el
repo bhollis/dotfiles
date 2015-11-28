@@ -256,7 +256,7 @@
 ;; cursor using M-n and M-p.
 (use-package smartscan
   :config
-  (smartscan-mode 1))
+  (global-smartscan-mode 1))
 
 ;; Turn on inline help in the minibuffer for all programming modes
 (use-package eldoc
@@ -284,7 +284,7 @@
   "Automatically fill comments, but nothing else"
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1)
-  (diminish 'auto-fill-mode))
+  (diminish 'auto-fill-function)) ; Unfortunately auto-fill-mode doesn't follow conventions
 (add-hook 'prog-mode-hook 'comment-auto-fill)
 
 ;; No tabs, two spaces by default
