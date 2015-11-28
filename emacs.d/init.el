@@ -149,6 +149,7 @@
   :config
   ;; I don't like these checkers, they're noisy
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc ruby-rubocop))
+  (setq flycheck-global-modes '(not text-mode))
   (global-flycheck-mode))
 ;; TODO: hotkey for show all errors in other window (C-c ! l right now)
 
@@ -319,10 +320,13 @@
   :config
   ;; Run all ruby-mode-hooks when using enh-ruby-mode
   (add-hook 'enh-ruby-mode-hook
-      (lambda ()
-  ;; Unless enh-ruby-mode has decided to inherit from ruby-mode
-  (unless (derived-mode-p 'ruby-mode)
-    (run-hooks 'ruby-mode-hook))))
+            (lambda ()
+              ;; Let flycheck handle error highlighting with squiggle underlines
+              (set-face-attribute 'erm-syn-errline nil :box nil)
+              (set-face-attribute 'erm-syn-warnline nil :box nil)
+              ;; Unless enh-ruby-mode has decided to inherit from ruby-mode
+              (unless (derived-mode-p 'ruby-mode)
+                (run-hooks 'ruby-mode-hook))))
   :mode
   ("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
    "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'")
