@@ -113,7 +113,7 @@
    ("M-y" . helm-show-kill-ring) ; Search and browse kill ring
    ("C-x C-f" . helm-find-files)
    ("C-x b" . helm-mini) ; helm buffer switch
-   ("M-i" . helm-imenu) ; bounce to function/method defs
+   ("M-i" . helm-semantic-or-imenu) ; bounce to function/method defs
    ("C-x c o" . helm-occur) ; Find occurences in buffer
    ;; C-x c a: helm-apropos
    )
@@ -125,7 +125,7 @@
 ;; Get into it with C-c p p and C-c p h
 (use-package projectile
   :init
-  (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+  (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
   :config
   (use-package helm-projectile)
   (projectile-global-mode)
@@ -265,6 +265,12 @@
   :init
   (add-hook 'prog-mode-hook 'eldoc-mode))
 
+;; Enable semantic parsing where applicable
+(use-package semantic
+  :commands semantic-mode
+  :init
+  (add-hook 'prog-mode-hook 'semantic-mode))
+
 ;; Highlight and auto-clean bad whitespace
 (use-package whitespace
   :diminish whitespace-mode
@@ -374,7 +380,8 @@
 ;; TODO: https://github.com/m0smith/malabar-mode
 ;; TODO: https://github.com/skeeto/ant-project-mode
 ;; TODO: https://github.com/skeeto/javadoc-lookup
-
+;; TODO: groovy/gradle modes?
+;; TODO: javap mode
 
 ;; ###### JavaScript #######
 
@@ -532,6 +539,7 @@
 ;; Open zsh files in sh-mode
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.zshrc\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("zshrc'" . sh-mode))
 
 
 
@@ -808,7 +816,7 @@
 
 (defun kill-buffers-matching (regexp)
   "Kill all buffers matching a regex."
-  (interactive "sKill buffers matching: ")
+  (interactive "Kill buffers matching: ")
   (dolist (i (buffer-list))
     (when (string-match regexp (buffer-name i))
       (kill-buffer i))))

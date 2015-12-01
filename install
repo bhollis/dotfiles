@@ -38,6 +38,7 @@ ln -s -F "$DOTFILES_PATH/emacs.d" ~/.emacs.d
 ln -s -f "$DOTFILES_PATH/gemrc" ~/.gemrc
 ln -s -f "$DOTFILES_PATH/gitconfig" ~/.gitconfig
 ln -s -f "$DOTFILES_PATH/zshrc" ~/.zshrc
+mkdir -p ~/bin
 ln -s -f "$DOTFILES_PATH"/bin/* ~/bin
 
 # bin/emacs and bin/ec are only for OS X!

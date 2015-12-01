@@ -3,6 +3,8 @@ emacs.d/auto-save-list/*
 emacs.d/url
 emacs.d/recentf*
 emacs.d/.mc-lists.el
+emacs.d/projectile-bookmarks.eld
+emacs.d/var
 .gitconfig.github
 \#*\#
 *~
