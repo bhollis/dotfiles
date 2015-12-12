@@ -283,6 +283,11 @@
   :config
   (global-whitespace-mode))
 
+(use-package ediff
+  :defer t
+  :config
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+
 ;; TODO: Multiple cursors: https://github.com/magnars/multiple-cursors.el
 
 ;; In programming modes, auto-fill comments, but nothing else.
@@ -496,9 +501,9 @@
       :config
       (add-to-list 'company-backends 'company-anaconda)))
   (add-hook 'python-mode-hook
-      (lambda ()
-  (subword-mode +1)
-  (anaconda-mode 1))))
+            (lambda ()
+              (subword-mode +1)
+              (anaconda-mode 1))))
 
 
 ;; ###### C/C++ #######
