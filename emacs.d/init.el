@@ -84,6 +84,7 @@
 ;; An important thing to remember is that helm finds stuff *first*, then decides what to do!
 ;; For example, find files with C-x C-f, then once selected C-x o to open it in other window.
 (use-package helm
+  :defines helm-find-files-map
   :init
   (setq helm-split-window-in-side-p t)
   (setq helm-autoresize-mode t)
