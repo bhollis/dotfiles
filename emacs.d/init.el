@@ -304,6 +304,23 @@
 (setq-default tab-width 2)
 (setq-default c-basic-offset 2)
 
+;; Highlight the current column in indentation-sensitive languages
+(use-package highlight-indentation
+  :init
+  (mapc (lambda (hook)
+          (add-hook hook 'highlight-indentation-current-column-mode))
+        '('coffee-mode-hook
+          'python-mode-hook
+          'haml-mode-hook
+          'sass-mode-hook))
+  :config
+  ;; Just a bit lighter than the background
+  (set-face-background 'highlight-indentation-current-column-face
+                       (color-lighten-name
+                        (face-attribute 'default :background) 2)))
+
+;; TODO: https://github.com/nschum/highlight-symbol.el
+
 
 
 ;; ################## Specific programming language modes #################
@@ -443,14 +460,19 @@
   :commands run-js
   :init
   (add-hook 'inferior-js-mode-hook
-      (lambda ()
-  (ansi-color-for-comint-mode-on)
-  ;; We'll do our own readline
-  (setenv "NODE_NO_READLINE" "1"))))
+            (lambda ()
+              (ansi-color-for-comint-mode-on)
+              ;; We'll do our own readline
+              (setenv "NODE_NO_READLINE" "1"))))
+
+;; TODO: normalize compile and REPL commands across langs
+;; use remap rather than synchronizing everything
 
 ;; Coffeescript is a friendlier JavaScript
-(use-package coffee-mode)
-
+(use-package coffee-mode
+  :config
+  ;; TODO: this should be some other binding
+  (define-key coffee-mode-map (kbd "C-c C-c") 'coffee-compile-region))
 
 ;; ###### HTML #######
 

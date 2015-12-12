@@ -89,4 +89,7 @@ which wget || brew install wget
 
 # TODO: npm installs, gem installs, etc
 # gem install rubocop
-# npm install -g tern
+npm install -g tern
+npm install -g coffee-script
+npm install -g coffeelint
+npm install -g jshint
