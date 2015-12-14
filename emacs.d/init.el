@@ -15,6 +15,7 @@
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")))
+;; TODO: melpa-stable instead of melpa?? melpa is "HEAD" versions
 (package-initialize)
 
 ;; Bootstrap `use-package': https://github.com/jwiegley/use-package
@@ -307,15 +308,17 @@
 
 ;; Highlight the current column in indentation-sensitive languages
 (use-package highlight-indentation
+  :defer t
   :init
   (mapc (lambda (hook)
           (add-hook hook 'highlight-indentation-current-column-mode))
-        '('coffee-mode-hook
-          'python-mode-hook
-          'haml-mode-hook
-          'sass-mode-hook))
+        '(coffee-mode-hook
+          python-mode-hook
+          haml-mode-hook
+          sass-mode-hook))
   :config
   ;; Just a bit lighter than the background
+  (require 'color)
   (set-face-background 'highlight-indentation-current-column-face
                        (color-lighten-name
                         (face-attribute 'default :background) 2)))
