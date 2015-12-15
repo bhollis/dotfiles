@@ -291,6 +291,7 @@
 (use-package ediff
   :defer t
   :config
+  (setq ediff-split-window-function 'split-window-horizontally)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
 ;; TODO: Multiple cursors: https://github.com/magnars/multiple-cursors.el
