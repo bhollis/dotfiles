@@ -11,6 +11,10 @@
 [branch]
   autosetuprebase = always
 
+# Always prune remote branches when fetching
+[fetch]
+  prune = true
+
 [core]
   autocrlf = input
   excludesFile = ~/.dotfiles/gitignore_global
@@ -39,3 +43,7 @@
   default = upstream
 [advice]
   statusHints = false
+[filter "lfs"]
+  smudge = git-lfs smudge %f
+  required = true
+  clean = git-lfs clean %f

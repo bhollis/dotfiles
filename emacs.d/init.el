@@ -70,6 +70,9 @@
 ;; Do all your git tasks from emacs. Never use git CLI again.
 ;; http://daemianmack.com/magit-cheatsheet.html
 (use-package magit
+  :init
+  (add-hook 'magit-mode-hook (lambda () (smartscan-mode -1)))
+  (add-hook 'magit-popup-mode-hook (lambda () (smartscan-mode -1)))
   :config
   (global-magit-file-mode)
   :bind
