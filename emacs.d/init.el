@@ -412,6 +412,9 @@
 ;; TODO: groovy/gradle modes?
 ;; TODO: javap mode
 
+(use-package groovy-mode)
+(use-package gradle-mode)
+
 ;; ###### JavaScript #######
 
 ;; TODO: https://github.com/purcell/emacs.d/blob/master/lisp/init-javascript.el
