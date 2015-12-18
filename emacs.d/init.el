@@ -281,13 +281,13 @@
 
 ;; Highlight and auto-clean bad whitespace
 (use-package whitespace
-  :diminish whitespace-mode
+  :diminish (global-whitespace-mode whitespace-mode)
   :init
   ;; THIS MACHINE KILLS TRAILING WHITESPACE
   ;; automatically clean up bad whitespace
   (setq whitespace-action '(auto-cleanup))
   ;; only show bad whitespace
-  (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab))
+  (setq whitespace-style '(face trailing space-before-tab indentation empty space-after-tab))
   :config
   (global-whitespace-mode))
 
