@@ -330,6 +330,10 @@
                        (color-lighten-name
                         (face-attribute 'default :background) 2)))
 
+;; Edit strings in a separate buffer with string-edit-at-point,
+;; C-c C-c to send them back!
+(use-package string-edit)
+
 (use-package yascroll
   :init
   (set-face-background 'yascroll:thumb-fringe "#666")
