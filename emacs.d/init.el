@@ -237,10 +237,9 @@
 ;; Turn annoying windows like *help* into popup windows that can be
 ;; closed with q or C-g!
 (use-package popwin
-  :init
+  :config
   ;; Hey, I like full side-by-side compile buffers, so leave 'em alone
   (delete '(compilation-mode :noselect t) popwin:special-display-config)
-  :config
   (popwin-mode 1))
 
 ;; Simple REST client / HTTP explorer
@@ -274,10 +273,10 @@
   (add-hook 'prog-mode-hook 'eldoc-mode))
 
 ;; Enable semantic parsing where applicable
-(use-package semantic
-  :commands semantic-mode
-  :init
-  (add-hook 'prog-mode-hook 'semantic-mode))
+;; (use-package semantic
+;;   :commands semantic-mode
+;;   :init
+;;   (add-hook 'prog-mode-hook 'semantic-mode))
 
 ;; Highlight and auto-clean bad whitespace
 (use-package whitespace
@@ -340,6 +339,36 @@
   (set-face-foreground 'yascroll:thumb-fringe "#666")
   :config
   (global-yascroll-bar-mode 1))
+
+(use-package compile
+  :init
+  ;; Shut up compile saves
+  (setq compilation-ask-about-save nil)
+  ;; Don't save *anything*
+  (setq compilation-save-buffers-predicate '(lambda () nil))
+  :config
+  ;; Add NodeJS error format
+  (setq compilation-error-regexp-alist-alist
+        ;; Tip: M-x re-builder to test this out
+        (cons '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
+                           1 ;; file
+                           2 ;; line
+                           3 ;; column
+                           )
+              compilation-error-regexp-alist-alist))
+  (setq compilation-error-regexp-alist
+        (cons 'node compilation-error-regexp-alist))
+  :bind
+  (("C-c C-c" . compile)
+   ("C-c C-r" . recompile)))
+
+;; TODO: look at Casey/work dotfiles to make compile better
+;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
+;;(global-set-key (kbd "C-c C-c") 'compile)
+;;(global-set-key "\C-B" 'recompile)
+;;global-set-key "\C-x\C-c" 'switch-to-most-recent-compile-buffer)
+
+
 
 ;; TODO: https://github.com/nschum/highlight-symbol.el
 
@@ -811,12 +840,6 @@
 ;; Compilation mode stuff.
 (global-set-key (kbd "C-q") 'next-error)
 (global-set-key (kbd "C-S-q") 'previous-error)
-
-;; TODO: look at Casey/work dotfiles to make compile better
-;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
-(global-set-key (kbd "C-c C-c") 'compile)
-;;(global-set-key "\C-B" 'recompile)
-;;global-set-key "\C-x\C-c" 'switch-to-most-recent-compile-buffer)
 
 ;; TODO: the keypad insert key is <help> (like F1)! Nice!
 
