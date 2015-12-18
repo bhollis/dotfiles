@@ -237,6 +237,9 @@
 ;; Turn annoying windows like *help* into popup windows that can be
 ;; closed with q or C-g!
 (use-package popwin
+  :init
+  ;; Hey, I like full side-by-side compile buffers, so leave 'em alone
+  (delete '(compilation-mode :noselect t) popwin:special-display-config)
   :config
   (popwin-mode 1))
 
@@ -483,7 +486,7 @@
 (use-package coffee-mode
   :config
   ;; TODO: this should be some other binding
-  (define-key coffee-mode-map (kbd "C-c C-c") 'coffee-compile-region))
+  (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
 
 ;; ###### HTML #######
 
@@ -784,8 +787,12 @@
 ;; Compilation mode stuff.
 (global-set-key (kbd "C-q") 'next-error)
 (global-set-key (kbd "C-S-q") 'previous-error)
+
+;; TODO: look at Casey/work dotfiles to make compile better
+;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
+(global-set-key (kbd "C-c C-c") 'compile)
 ;;(global-set-key "\C-B" 'recompile)
-;(global-set-key "\C-x\C-c" 'switch-to-most-recent-compile-buffer)
+;;global-set-key "\C-x\C-c" 'switch-to-most-recent-compile-buffer)
 
 ;; TODO: the keypad insert key is <help> (like F1)! Nice!
 
