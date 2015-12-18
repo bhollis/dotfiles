@@ -661,6 +661,16 @@
 (setq-default mode-line-modified '("%*%* "))
 (setq-default mode-line-buffer-identification '("%b"))
 
+;; Don't tell me about mail (you can't read GMail anyway)
+(setq-default display-time-mail-file -1)
+;; Don't tell me about system load, either. I have lots of cores.
+(setq-default display-time-default-load-average nil)
+;; Show the time in the mode line.
+(display-time-mode)
+;; Show battery level in the mode line.
+(display-battery-mode)
+
+
 ;; Show matching parens/braces
 (show-paren-mode 1)
 
