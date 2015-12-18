@@ -330,6 +330,13 @@
                        (color-lighten-name
                         (face-attribute 'default :background) 2)))
 
+(use-package yascroll
+  :init
+  (set-face-background 'yascroll:thumb-fringe "#666")
+  (set-face-foreground 'yascroll:thumb-fringe "#666")
+  :config
+  (global-yascroll-bar-mode 1))
+
 ;; TODO: https://github.com/nschum/highlight-symbol.el
 
 
@@ -617,6 +624,9 @@
 
 ;; Slim down the fringe
 (set-fringe-mode '(1 . 1))
+
+;; No scroll bars
+(scroll-bar-mode -1)
 
 ;; Never show the splash screen
 (setq inhibit-startup-message t)
