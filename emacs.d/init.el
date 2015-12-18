@@ -334,10 +334,9 @@
 (use-package string-edit)
 
 (use-package yascroll
-  :init
+  :config
   (set-face-background 'yascroll:thumb-fringe "#666")
   (set-face-foreground 'yascroll:thumb-fringe "#666")
-  :config
   (global-yascroll-bar-mode 1))
 
 (use-package compile
