@@ -71,8 +71,12 @@
 ;; http://daemianmack.com/magit-cheatsheet.html
 (use-package magit
   :init
-  (add-hook 'magit-mode-hook (lambda () (smartscan-mode -1)))
-  (add-hook 'magit-popup-mode-hook (lambda () (smartscan-mode -1)))
+  ;; Turn off smartscan in magit
+  (mapc (lambda (hook)
+          (add-hook hook (lambda () (smartscan-mode -1))))
+        '(git-rebase-mode-hook
+          magit-mode-hook
+          magit-popup-mode-hook))
   :config
   (global-magit-file-mode)
   :bind
