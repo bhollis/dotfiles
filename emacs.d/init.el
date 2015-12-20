@@ -836,6 +836,9 @@
 (global-unset-key "\C-t") ;; usually transpose-characters, I fat-finger it too often with C-y
 (global-unset-key "\C-l") ;; usually recenter-top-bottom, which I hate
 (global-unset-key (kbd "C-/")) ;; usually undo, but I fat-finger with M-/ and I use C-z for undo
+(global-unset-key (kbd "s-n")) ;; Cmd-N for new frame, do not want
+(global-unset-key (kbd "s-o")) ;; Mac open file
+(global-unset-key (kbd "s-p")) ;; Mac print
 
 ;; other stuff...
 (global-set-key "\C-c\C-s" 'new-shell)
