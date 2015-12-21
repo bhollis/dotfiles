@@ -839,6 +839,8 @@
 (global-unset-key (kbd "s-n")) ;; Cmd-N for new frame, do not want
 (global-unset-key (kbd "s-o")) ;; Mac open file
 (global-unset-key (kbd "s-p")) ;; Mac print
+(global-unset-key (kbd "s-q")) ;; Quit
+(global-unset-key (kbd "s-t")) ;; Fonts?
 
 ;; other stuff...
 (global-set-key "\C-c\C-s" 'new-shell)
