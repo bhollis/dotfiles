@@ -600,6 +600,17 @@
   (other . "gnu")))
 
 
+;; ###### Obj-C #######
+
+;; TODO: compile command via xcodebuild
+
+(use-package objc-mode
+  :init
+  (add-hook 'objc-mode-hook
+            (lambda ()
+              (setq c-basic-offset 4))))
+
+
 ;; ###### Perl #######
 
 ;; I hope I don't have to write Perl anymore...
