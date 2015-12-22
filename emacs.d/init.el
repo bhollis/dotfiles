@@ -929,6 +929,23 @@
 
 
 
+;; ################## Org Mode ###########################
+
+;; Org mode is a whole other thing
+
+;; TODO: http://stackoverflow.com/questions/21195327/emacs-force-org-mode-capture-buffer-to-open-in-a-new-window
+;; TODO: Move vars around
+;; TODO: http://cestdiego.github.io/blog/2015/08/19/org-protocol/
+;; TODO: http://orgmode.org/manual/Capture-templates.html
+(use-package org
+  :config
+  (setq org-default-notes-file bhollis-todo-file)
+  :bind
+  ;; Esc-PrintScrn
+  ("<escape> <f13>" . org-capture))
+
+
+
 ;; ######## Customize variables #########
 
 ;; TODO: Move these out into here
