@@ -290,7 +290,7 @@
   ;; automatically clean up bad whitespace
   (setq whitespace-action '(auto-cleanup))
   ;; only show bad whitespace
-  (setq whitespace-style '(face trailing space-before-tab indentation empty space-after-tab))
+  (setq whitespace-style '(face trailing space-before-tab indentation space-after-tab))
   :config
   (global-whitespace-mode))
 
