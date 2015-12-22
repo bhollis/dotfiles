@@ -144,7 +144,7 @@
   :bind
   ;; Bind some "override" or shift-modified versions of familiar
   ;; commands to project-oriented versions
-  (("C-x B" . helm-projectile)
+  (("C-x C-b" . helm-projectile)
    ("C-x F" . helm-projectile-find-file-dwim)
    ;; C-c p b: switch buffers
    ;; C-c p a: find other file
