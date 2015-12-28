@@ -361,6 +361,14 @@
               compilation-error-regexp-alist-alist))
   (setq compilation-error-regexp-alist
         (cons 'node compilation-error-regexp-alist))
+
+  ;; Allow color in compilation buffers
+  (require 'ansi-color)
+  (defun colorize-compilation-buffer ()
+    (read-only-mode 1)
+    (ansi-color-apply-on-region compilation-filter-start (point))
+    (read-only-mode -1))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
   :bind
   (("C-c C-c" . compile)
    ("C-c C-r" . recompile)))
