@@ -898,8 +898,8 @@
 (global-set-key "\C-v" 'yank)
 
 ;; Esc-t to load TODO, Esc-l to load journal
-(global-set-key "\et" 'load-todo)
-(global-set-key "\el" 'load-log)
+(global-set-key (kbd "<escape> t") 'load-todo)
+(global-set-key (kbd "<escape> l") 'load-log)
 
 
 
@@ -981,6 +981,7 @@
 ;; TODO: Move vars around
 ;; TODO: http://cestdiego.github.io/blog/2015/08/19/org-protocol/
 ;; TODO: http://orgmode.org/manual/Capture-templates.html
+;; TODO: bind helm-org-in-buffer-headings (M-i?)
 (use-package org
   :config
   (setq org-default-notes-file bhollis-todo-file)
