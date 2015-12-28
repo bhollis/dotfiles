@@ -263,6 +263,19 @@
   :config
   (global-discover-mode 1))
 
+;; TODO: Consider discover-my-major as well?
+
+;; Popup help after prefixes, like an automatic discover.el
+;; https://github.com/kai2nenobu/guide-key
+(use-package guide-key
+  :diminish guide-key-mode
+  :config
+  (setq guide-key/popup-window-position 'bottom)
+  (setq guide-key/idle-delay 0.5)
+  ;; Help out with projectile and helm
+  (setq guide-key/guide-key-sequence '("C-c p" "C-x c"))
+  (guide-key-mode 1))
+
 ;; Quickly jump to next/previous occurrences of the symbol under the
 ;; cursor using M-n and M-p.
 (use-package smartscan
@@ -457,6 +470,10 @@
 
 ;; Edit Cucumber features
 (use-package feature-mode
+  :init
+  (add-hook 'feature-mode-hook
+            (lambda ()
+              (guide-key/add-local-guide-key-sequence "C-c ,")))
   :commands feature-mode)
 ;; Keybinding	Description
 ;; TODO: contribute a discover menu for this?
