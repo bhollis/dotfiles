@@ -358,6 +358,8 @@
 
 (use-package compile
   :init
+  ;; Scroll compilation
+  (setq compilation-scroll-output t)
   ;; Shut up compile saves
   (setq compilation-ask-about-save nil)
   ;; Don't save *anything*
