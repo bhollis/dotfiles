@@ -77,6 +77,8 @@
         '(git-rebase-mode-hook
           magit-mode-hook
           magit-popup-mode-hook))
+  (setq magit-completing-read-function 'helm--completing-read-default)
+  (setq magit-branch-prefer-remote-upstream '("master" "dev"))
   :config
   (global-magit-file-mode)
   :bind
@@ -93,6 +95,7 @@
 ;; For example, find files with C-x C-f, then once selected C-x o to open it in other window.
 (use-package helm
   :defines helm-find-files-map
+  :diminish helm-mode
   :init
   (setq helm-split-window-in-side-p t)
   (setq helm-autoresize-mode t)
