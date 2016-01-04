@@ -735,6 +735,7 @@
 ;; wrap the line in the display if it is wider than the window.
 ;; It's still one 'line' in the file.
 (setq truncate-partial-width-windows 50)
+(toggle-truncate-lines -1)
 
 ;;  mode line format
 (setq-default mode-line-modified '("%*%* "))
