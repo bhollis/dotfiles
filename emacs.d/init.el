@@ -552,15 +552,9 @@
   (setq company-tern-property-marker " .")
   (add-to-list 'company-backends 'company-tern))
 
-;; Run NodeJS in an inferior process window
-(use-package js-comint
-  :commands run-js
-  :init
-  (add-hook 'inferior-js-mode-hook
-            (lambda ()
-              (ansi-color-for-comint-mode-on)
-              ;; We'll do our own readline
-              (setenv "NODE_NO_READLINE" "1"))))
+;; Run NodeJS in an inferior process window TODO: keybindings for repl common
+;; across JS, coffee, etc.
+(use-package nodejs-repl)
 
 ;; TODO: normalize compile and REPL commands across langs
 ;; use remap rather than synchronizing everything
