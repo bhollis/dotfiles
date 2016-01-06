@@ -470,7 +470,9 @@
               ;; Let flycheck handle error highlighting with squiggle underlines
               (custom-set-faces
                '(erm-syn-warnline ((t (:underline (:style wave :color "orange")))))
-               '(erm-syn-errline ((t (:underline (:style wave :color "red"))))))
+               '(erm-syn-errline ((t (:underline (:style wave :color "red")))))
+               '(enh-ruby-op-face ((t (:foreground nil :inherit 'default))))
+              )
             ))
   :mode
   ("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
