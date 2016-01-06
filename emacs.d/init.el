@@ -1003,6 +1003,12 @@
   :defer t
   :config
   (setq org-default-notes-file bhollis-todo-file)
+  (setq org-refile-targets '((nil :maxlevel . 2)
+                             ;; all top-level headlines in the
+                             ;; current buffer are used (first) as a
+                             ;; refile target
+                             (org-agenda-files :maxlevel . 2)))
+  ;(setq org-refile-use-outline-path 'file)
   :bind
   ;; Esc-PrintScrn
   ("<escape> <f13>" . org-capture))
