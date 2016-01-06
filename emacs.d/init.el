@@ -424,22 +424,27 @@
 ;; ###### Ruby #######
 
 ;; TODO: https://github.com/flycheck/flycheck/issues/288
-;; TODO: enhanced ruby mode
 ;; TODO: rvm mode?
 ;; TODO: https://github.com/purcell/emacs.d/blob/master/lisp/init-ruby-mode.el
 
 ;; Enhanced ruby-mode uses Ripper to parse Ruby instead of regexps
 (use-package enh-ruby-mode
+  :init
+  (setq enh-ruby-bounce-deep-indent t)
+  (setq enh-ruby-hanging-brace-indent-level 2)
+  (setq enh-ruby-use-ruby-mode-show-parens-config t)
   :config
   ;; Run all ruby-mode-hooks when using enh-ruby-mode
   (add-hook 'enh-ruby-mode-hook
             (lambda ()
-              ;; Let flycheck handle error highlighting with squiggle underlines
-              (set-face-attribute 'erm-syn-errline nil :box nil)
-              (set-face-attribute 'erm-syn-warnline nil :box nil)
               ;; Unless enh-ruby-mode has decided to inherit from ruby-mode
               (unless (derived-mode-p 'ruby-mode)
-                (run-hooks 'ruby-mode-hook))))
+                (run-hooks 'ruby-mode-hook))
+              ;; Let flycheck handle error highlighting with squiggle underlines
+              (custom-set-faces
+               '(erm-syn-warnline ((t (:underline (:style wave :color "orange")))))
+               '(erm-syn-errline ((t (:underline (:style wave :color "red"))))))
+            ))
   :mode
   ("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
    "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'")
@@ -453,7 +458,8 @@
   :commands inf-ruby-minor-mode)
 
 ;; Autocompletion and doc lookup in ruby: https://github.com/dgutov/robe
-;; Requires "pry" to be in your Gemfile
+;; Requires "pry" to be in your Gemfile, and M-x robe-start or another
+;; robe command to be run.
 (use-package robe
   :init
   (add-hook 'ruby-mode-hook 'robe-mode)
@@ -476,6 +482,7 @@
 ;; Support YARD documentation syntax
 (use-package yard-mode
   :commands yard-mode
+  :diminish yard-mode
   :init
   (add-hook 'ruby-mode-hook 'yard-mode))
 
