@@ -132,7 +132,7 @@
    ("C-x b" . helm-mini) ; helm buffer switch
    ("M-i" . helm-semantic-or-imenu) ; bounce to function/method defs
    ("C-x c o" . helm-occur) ; Find occurences in buffer
-   ("C-x h g" . helm-google-suggest) ; Search the web
+   ;;("C-x h g" . helm-google-suggest) ; Search the web
    ;; C-x c a: helm-apropos
    )
 )
@@ -175,6 +175,7 @@
 ;; expand, or C-c y to bring up a company-mode list of available
 ;; snippets. Install snippets from yasnippet-snippets as a submodule,
 ;; or add your own!
+;; TODO: Do I really use this?
 (use-package yasnippet
   :diminish yas-minor-mode
   :init
@@ -214,6 +215,7 @@
   ;; C-w in the menu to see source code!
   ;; C-g to dismiss popup
   )
+
 ;; TODO: to prevent completion in comments, you might want to remove company-dabbrev from company-backends altogether
 
 ;; Try out hippie-exp in place of completion/dabbrev
@@ -555,6 +557,7 @@
   :mode (("\\.js$" . js2-mode)
    ("\\.jsx$" . js2-jsx-mode))
   :interpreter ("node" . js2-mode))
+;; TODO: non-conflicting jump to definition key
 
 ;; JavaScript refactoring. C-c C-r
 (use-package js2-refactor

@@ -70,7 +70,6 @@ source ~/.dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], 
 export LESS='-FRiX' # quit if one screen, color, case insensitive searching
 export PAGER=less
 export EDITOR='ec'
-export TEST='1111'
 export PATH=~/bin:$PATH:/usr/local/share/npm/bin
 
 #################### coloring matters ########################
