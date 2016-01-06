@@ -94,16 +94,18 @@
 ;; An important thing to remember is that helm finds stuff *first*, then decides what to do!
 ;; For example, find files with C-x C-f, then once selected C-x o to open it in other window.
 (use-package helm
-  :defines helm-find-files-map
   :diminish helm-mode
+  :defines helm-find-files-map
   :init
   (setq helm-split-window-in-side-p t)
   (setq helm-autoresize-mode t)
   ;; TODO: Apparently this crashes emacs 24.5 - don't want to mess with emacs from Homebrew yet.
   ;; https://github.com/bbatsov/projectile/issues/600
-;  (setq helm-buffers-fuzzy-matching t)
-;  (setq helm-M-x-fuzzy-match t)
-;  (setq helm-recentf-fuzzy-match t)
+  ;;  (setq helm-buffers-fuzzy-matching t)
+  ;;  (setq helm-M-x-fuzzy-match t)
+  ;;  (setq helm-recentf-fuzzy-match t)
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
   :config
   (require 'helm-config)
   (define-key helm-map (kbd "C-]") 'helm-keyboard-quit)
@@ -116,10 +118,11 @@
   (defun helm-find-files-into-directories ()
     (interactive)
     (if (file-directory-p (helm-get-selection))
-  (helm-execute-persistent-action)
+        (helm-execute-persistent-action)
       (helm-maybe-exit-minibuffer)))
   (define-key helm-find-files-map (kbd "<return>") 'helm-find-files-into-directories)
   ;; TODO: bind with keymaps: https://github.com/jwiegley/use-package/issues/121
+  (helm-mode 1)
   :bind
   (("M-x" . helm-M-x) ; Searchable functions
    ("M-y" . helm-show-kill-ring) ; Search and browse kill ring
@@ -127,6 +130,7 @@
    ("C-x b" . helm-mini) ; helm buffer switch
    ("M-i" . helm-semantic-or-imenu) ; bounce to function/method defs
    ("C-x c o" . helm-occur) ; Find occurences in buffer
+   ("C-x h g" . helm-google-suggest) ; Search the web
    ;; C-x c a: helm-apropos
    )
 )
