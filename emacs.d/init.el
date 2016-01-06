@@ -485,7 +485,9 @@
 (use-package inf-ruby
   :init
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
-  :commands inf-ruby-minor-mode)
+  :commands inf-ruby-minor-mode
+  :bind
+  (("C-c C-s" . inf-ruby-console-auto)))
 
 ;; Autocompletion and doc lookup in ruby: https://github.com/dgutov/robe
 ;; Requires "pry" to be in your Gemfile, and M-x robe-start or another
@@ -496,7 +498,9 @@
   (eval-after-load 'company
     '(push 'company-robe company-backends))
   :diminish robe-mode
-  :commands (robe-mode company-robe))
+  :commands (robe-mode company-robe)
+  :bind
+  (("C-h l" . robe-doc)))
 
 ;; Projectile integration for Rails project.
 ;; TODO: this conflicts with the inf-ruby shortcuts though
