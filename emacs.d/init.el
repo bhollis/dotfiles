@@ -499,8 +499,12 @@
     '(push 'company-robe company-backends))
   :diminish robe-mode
   :commands (robe-mode company-robe)
-  :bind
-  (("C-h l" . robe-doc)))
+  ;;  - M-. to jump to the definition
+  ;;  - M-, to jump back
+  ;;  - C-c C-d to see the documentation
+  ;;  - C-c C-k to refresh Rails environment
+  ;;  - C-M-i to complete the symbol at point
+)
 
 ;; Projectile integration for Rails project.
 ;; TODO: this conflicts with the inf-ruby shortcuts though
