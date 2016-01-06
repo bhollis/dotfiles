@@ -39,6 +39,8 @@
 ;; Get PATH from shell on OSX, for when we launched from the dock
 (when is-mac
   (use-package exec-path-from-shell
+    :init
+    (setq exec-path-from-shell-check-startup-file nil)
     :config
     (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
     (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
