@@ -339,6 +339,7 @@
 ;; Highlight the current column in indentation-sensitive languages
 (use-package highlight-indentation
   :defer t
+  :diminish highlight-indentation-current-column-mode
   :init
   (mapc (lambda (hook)
           (add-hook hook 'highlight-indentation-current-column-mode))
