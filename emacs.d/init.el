@@ -398,6 +398,29 @@
   (("C-c C-c" . compile)
    ("C-c C-r" . recompile)))
 
+;; GNU Global Tags - search for code
+;; M-. to find tag
+;;    brew install ctags
+;;    brew install global --with-exuberant-ctags
+;;    pip install pygments
+;; (use-package ggtags
+;;   :commands
+;;   ggtags-mode
+;;   ggtags-find-tag-dwim
+;;   :init
+;;   (add-hook 'c-mode-common-hook
+;;             (lambda ()
+;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+;;                 (ggtags-mode 1))))
+;;   (mapc (lambda (hook)
+;;           (add-hook hook (lambda () (smartscan-mode -1))))
+;;         '(;;js2-mode-hook
+;;           ruby-mode-hook
+;;           emacs-lisp-mode-hook
+;;           csharp-mode-hook
+;;           python-mode-hook
+;;           objc-mode-hook)))
+
 ;; TODO: look at Casey/work dotfiles to make compile better
 ;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
 ;;(global-set-key (kbd "C-c C-c") 'compile)
