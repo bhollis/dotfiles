@@ -495,8 +495,8 @@
 (use-package robe
   :init
   (add-hook 'ruby-mode-hook 'robe-mode)
-  (eval-after-load 'company
-    '(push 'company-robe company-backends))
+  (with-eval-after-load 'company
+    (push 'company-robe company-backends))
   :diminish robe-mode
   :commands (robe-mode company-robe)
   ;;  - M-. to jump to the definition
