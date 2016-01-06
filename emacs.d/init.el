@@ -439,7 +439,8 @@
 
 ;; TODO: dig deeper into specific programming languages when I use them
 
-(use-package crontab-mode :defer t)
+(use-package crontab-mode
+  :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
 (use-package php-mode :defer t)
 (use-package yaml-mode :defer t)
 (use-package csharp-mode :defer t)
