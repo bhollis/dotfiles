@@ -449,6 +449,20 @@
 ;; TODO: clojure?
 
 
+;; ###### Web, templating #######
+
+;; http://web-mode.org/
+;; TODO: fix awful fonts
+(use-package web-mode
+  :init
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq-default web-mode-css-indent-offset 2)
+  (setq-default web-mode-code-indent-offset 2)
+  (setq-default web-mode-enable-current-element-highlight t)
+  :mode
+  ("\\.erb\\'"
+   "\\.html?\\'"))
+
 ;; ###### Ruby #######
 
 ;; TODO: https://github.com/flycheck/flycheck/issues/288
