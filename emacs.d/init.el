@@ -403,7 +403,7 @@
 ;; GNU Global Tags - search for code
 ;; M-. to find tag
 ;;    brew install ctags
-;;    brew install global --with-exuberant-ctags
+;;    brew install global --with-ctags
 ;;    pip install pygments
 ;; (use-package ggtags
 ;;   :commands
@@ -413,7 +413,7 @@
 ;;   (add-hook 'c-mode-common-hook
 ;;             (lambda ()
 ;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;                 (ggtags-mode 1))))
+;;                 (ggtags-mode 1)))))
 ;;   (mapc (lambda (hook)
 ;;           (add-hook hook (lambda () (smartscan-mode -1))))
 ;;         '(;;js2-mode-hook
