@@ -255,7 +255,7 @@
 
 ;; Simple REST client / HTTP explorer
 ;; https://github.com/pashky/restclient.el
-(use-package restclient)
+(use-package restclient :defer t)
 
 ;; Quickly look stuff up in Dash (only on OSX)
 ;; https://kapeli.com/dash
@@ -338,7 +338,7 @@
 
 ;; Highlight the current column in indentation-sensitive languages
 (use-package highlight-indentation
-  :defer t
+  :commands highlight-indentation-current-column-mode
   :diminish highlight-indentation-current-column-mode
   :init
   (mapc (lambda (hook)
@@ -356,7 +356,7 @@
 
 ;; Edit strings in a separate buffer with string-edit-at-point,
 ;; C-c C-c to send them back!
-(use-package string-edit)
+(use-package string-edit :defer t)
 
 (use-package yascroll
   :config
@@ -412,11 +412,12 @@
 
 ;; TODO: dig deeper into specific programming languages when I use them
 
-(use-package crontab-mode)
-(use-package php-mode)
-(use-package yaml-mode)
-(use-package csharp-mode)
-(use-package markdown-mode)
+(use-package crontab-mode :defer t)
+(use-package php-mode :defer t)
+(use-package yaml-mode :defer t)
+(use-package csharp-mode :defer t)
+(use-package markdown-mode :defer t)
+(use-package apache-mode :defer t)
 ;; TODO: clojure?
 
 
@@ -504,8 +505,8 @@
 ;; TODO: groovy/gradle modes?
 ;; TODO: javap mode
 
-(use-package groovy-mode)
-(use-package gradle-mode)
+(use-package groovy-mode :defer t)
+(use-package gradle-mode :defer t)
 
 ;; ###### JavaScript #######
 
@@ -539,6 +540,7 @@
 ;; http://ternjs.net/
 ;; Must be installed: npm install -g tern
 (use-package tern
+  :commands tern-mode
   :diminish tern-mode
   :init
   (add-hook 'js2-mode-hook 'tern-mode)
@@ -559,13 +561,14 @@
 
 ;; Run NodeJS in an inferior process window TODO: keybindings for repl common
 ;; across JS, coffee, etc.
-(use-package nodejs-repl)
+(use-package nodejs-repl :defer t)
 
 ;; TODO: normalize compile and REPL commands across langs
 ;; use remap rather than synchronizing everything
 
 ;; Coffeescript is a friendlier JavaScript
 (use-package coffee-mode
+  :defer t
   :config
   ;; TODO: this should be some other binding
   (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
@@ -583,13 +586,13 @@
 ;; TODO: helm-emmet, company-emmet
 
 ;; Haml is a better HTML
-(use-package haml-mode)
+(use-package haml-mode :defer t)
 
 
 ;; ###### CSS #######
 
 ;; Sass is a better CSS
-(use-package sass-mode)
+(use-package sass-mode :defer t)
 
 ;; Eldoc (inline documentation) support for CSS
 (use-package css-eldoc
@@ -988,6 +991,7 @@
 ;; TODO: http://orgmode.org/manual/Capture-templates.html
 ;; TODO: bind helm-org-in-buffer-headings (M-i?)
 (use-package org
+  :defer t
   :config
   (setq org-default-notes-file bhollis-todo-file)
   :bind
