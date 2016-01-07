@@ -400,6 +400,21 @@
   (("C-c C-c" . compile)
    ("C-c C-r" . recompile)))
 
+;; C-c r to rotate among lists of text tokens
+(use-package rotate-text
+  :load-path "lisp/"
+  :ensure nil
+  :init
+  (setq rotate-text-rotations
+        '(("true" "false")
+          ("yes" "no")
+          ("nil" "t")
+          ("height" "width")))
+  :bind
+  (("C-c r" . rotate-word-at-point)))
+
+
+
 ;; GNU Global Tags - search for code
 ;; M-. to find tag
 ;;    brew install global --with-ctags --with-pygments
