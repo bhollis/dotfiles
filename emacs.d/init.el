@@ -402,18 +402,15 @@
 
 ;; GNU Global Tags - search for code
 ;; M-. to find tag
-;;    brew install ctags
-;;    brew install global --with-ctags
-;;    pip install pygments
-;; (use-package ggtags
-;;   :commands
-;;   ggtags-mode
-;;   ggtags-find-tag-dwim
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;;             (lambda ()
-;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;                 (ggtags-mode 1)))))
+;;    brew install global --with-ctags --with-pygments
+(use-package ggtags
+  :defer t
+  ;; :init
+  ;; (add-hook 'c-mode-common-hook
+  ;;           (lambda ()
+  ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+  ;;               (ggtags-mode 1))))
+)
 ;;   (mapc (lambda (hook)
 ;;           (add-hook hook (lambda () (smartscan-mode -1))))
 ;;         '(;;js2-mode-hook

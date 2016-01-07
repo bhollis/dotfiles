@@ -71,6 +71,7 @@ export LESS='-FRiX' # quit if one screen, color, case insensitive searching
 export PAGER=less
 export EDITOR='ec'
 export PATH=~/bin:$PATH:/usr/local/share/npm/bin
+export GTAGSLABEL='ctags'
 
 #################### coloring matters ########################
 # Color codes: 00;{30,31,32,33,34,35,36,37} and 01;{30,31,32,33,34,35,36,37}
