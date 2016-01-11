@@ -587,6 +587,7 @@
 ;; A better JavaScript mode, with JSX support
 (use-package js2-mode
   :init
+  (setq js2-skip-preprocessor-directives t) ; Allow shebangs!
   (setq js-indent-level 2)
   (setq js2-basic-offset 2)
   (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
