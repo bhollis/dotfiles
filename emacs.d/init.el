@@ -336,7 +336,7 @@
 (defun comment-auto-fill ()
   "Automatically fill comments, but nothing else"
   (setq-local comment-auto-fill-only-comments t)
-  (auto-fill-mode 1)
+  ;;(auto-fill-mode 1)
   (diminish 'auto-fill-function)) ; Unfortunately auto-fill-mode doesn't follow conventions
 (add-hook 'prog-mode-hook 'comment-auto-fill)
 
