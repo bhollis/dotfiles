@@ -94,6 +94,7 @@
 ;; Include pull request info in magit
 (use-package magit-gh-pulls
   :commands turn-on-magit-gh-pulls
+  :disabled t
   :init
   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
