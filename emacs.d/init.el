@@ -290,7 +290,7 @@
   (setq guide-key/popup-window-position 'bottom)
   (setq guide-key/idle-delay 0.5)
   ;; Help out with projectile and helm and smerge
-  (setq guide-key/guide-key-sequence '("C-c p" "C-x c" "C-c ^"))
+  (setq guide-key/guide-key-sequence '("C-c p" "C-x c" "C-c ^" "C-c @"))
   (guide-key-mode 1))
 
 ;; Quickly jump to next/previous occurrences of the symbol under the
