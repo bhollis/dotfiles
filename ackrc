@@ -1,9 +1,6 @@
---type-add
-js=.coffee
---type-add
-html=.haml
---type-add
-css=.sass
---type-add
-css=.scss
-
+--type-add=js:ext:coffee
+--type-add=html:ext:haml
+--type-add=css:ext:sass,scss
+--ignore-directory=is:.idea
+--ignore-directory=is:.cache
+--ignore-directory=is:.sass-cache
