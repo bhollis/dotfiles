@@ -82,6 +82,11 @@
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master" "dev"))
   :config
+  (advice-add 'magit-popup-mode-display-buffer :around
+              'magit-popup-mode-display-buffer--split-window-sensibly)
+  (defun magit-popup-mode-display-buffer--split-window-sensibly (fn buffer mode)
+    (let ((split-window-preferred-function 'split-window-sensibly))
+      (funcall fn buffer mode)))
   (global-magit-file-mode)
   :bind
   (("C-x g" . magit-status)
