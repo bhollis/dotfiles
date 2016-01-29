@@ -414,10 +414,15 @@
   (setq rotate-text-rotations
         '(("true" "false")
           ("yes" "no")
+          ("YES" "NO")
+          ("on" "off")
+          ("ON" "OFF")
           ("nil" "t")
+          ("none" "block")
           ("height" "width")))
   :bind
-  (("C-c r" . rotate-word-at-point)))
+  ;; "toggle"
+  (("C-c t" . rotate-word-at-point)))
 
 
 
