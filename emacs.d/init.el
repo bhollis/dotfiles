@@ -490,7 +490,7 @@
   ;; fci-mode appears to mess up web-mode indentation
   (add-hook 'web-mode-hook
             (lambda ()
-              (turn-off-fci-mode))
+              (turn-off-fci-mode)))
   :mode
   ("\\.erb\\'"
    "\\.html?\\'"))
