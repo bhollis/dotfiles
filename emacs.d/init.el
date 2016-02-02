@@ -482,6 +482,11 @@
   (setq-default web-mode-css-indent-offset 2)
   (setq-default web-mode-code-indent-offset 2)
   (setq-default web-mode-enable-current-element-highlight t)
+  :config
+  ;; fci-mode appears to mess up web-mode indentation
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (turn-off-fci-mode))
   :mode
   ("\\.erb\\'"
    "\\.html?\\'"))
