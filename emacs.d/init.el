@@ -81,6 +81,7 @@
           magit-popup-mode-hook))
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master" "dev"))
+  (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
   (advice-add 'magit-popup-mode-display-buffer :around
               'magit-popup-mode-display-buffer--split-window-sensibly)
@@ -337,6 +338,8 @@
   "Automatically fill comments, but nothing else"
   (setq-local comment-auto-fill-only-comments t)
   ;;(auto-fill-mode 1)
+  (turn-off-auto-fill)
+  (setq truncate-lines nil)
   (diminish 'auto-fill-function)) ; Unfortunately auto-fill-mode doesn't follow conventions
 (add-hook 'prog-mode-hook 'comment-auto-fill)
 
