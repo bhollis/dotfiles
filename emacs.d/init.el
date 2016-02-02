@@ -219,6 +219,7 @@
     (company-flx-mode +1))
   :bind
   ("C-c y" . company-yasnippet) ; offer completions for yasnippet
+  ("M-<tab>" . company-complete)
   ;; C-w in the menu to see source code!
   ;; C-g to dismiss popup
   )
