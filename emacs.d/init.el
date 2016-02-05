@@ -443,6 +443,9 @@
 ;;    brew install global --with-ctags --with-pygments
 (use-package ggtags
   :defer t
+  :bind
+  ;; Cmd-O like in IntelliJ
+  ("s-o" . ggtags-find-tag-dwim))
   ;; :init
   ;; (add-hook 'c-mode-common-hook
   ;;           (lambda ()
