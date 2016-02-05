@@ -428,6 +428,14 @@
   ;; "toggle"
   (("C-c t" . rotate-word-at-point)))
 
+;; Turn on subword-mode for all programming modes. This lets you
+;; navigate between words in CamelCase, etc.
+(use-package subword
+  :diminish subword-mode
+  :config
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (subword-mode 1))))
 
 
 ;; GNU Global Tags - search for code
