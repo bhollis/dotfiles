@@ -95,7 +95,6 @@
 ;; Include pull request info in magit
 (use-package magit-gh-pulls
   :commands turn-on-magit-gh-pulls
-  :disabled t
   :init
   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
@@ -428,6 +427,13 @@
   ;; "toggle"
   (("C-c t" . rotate-word-at-point)))
 
+;; Toggle case (snake, camel, etc)
+(use-package string-inflection
+  :bind
+  (("C-c i" . string-inflection-cycle)
+   ("C-c C" . string-inflection-lower-camelcase)
+   ("C-c U" . string-inflection-underscore)))
+
 ;; Turn on subword-mode for all programming modes. This lets you
 ;; navigate between words in CamelCase, etc.
 (use-package subword
@@ -451,7 +457,7 @@
   ;;           (lambda ()
   ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
   ;;               (ggtags-mode 1))))
-)
+
 ;;   (mapc (lambda (hook)
 ;;           (add-hook hook (lambda () (smartscan-mode -1))))
 ;;         '(;;js2-mode-hook
@@ -697,6 +703,7 @@
 
 ;; Sass is a better CSS
 (use-package sass-mode :defer t)
+(use-package scss-mode :defer t)
 
 ;; Eldoc (inline documentation) support for CSS
 (use-package css-eldoc
@@ -809,6 +816,7 @@
 
 ;; Reload files that have changed on disk
 (global-auto-revert-mode t)
+(diminish 'auto-revert-mode)
 
 ;; I generally hate auto-fill-mode in text
 (remove-hook 'text-mode-hook #'turn-on-auto-fill)
