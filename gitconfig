@@ -38,6 +38,9 @@
 [include]
     path = ~/.gitconfig.github
 
+[rerere]
+  enabled = true
+
 [credential]
   helper = osxkeychain
 [push]
