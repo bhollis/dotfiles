@@ -483,6 +483,7 @@
 
 ;; ################## Specific programming language modes #################
 
+
 ;; TODO: dig deeper into specific programming languages when I use them
 
 (use-package crontab-mode
@@ -782,6 +783,20 @@
   :mode ("\\.cgi$" . cperl-mode))
 
 
+;; ###### Protobuf #######
+(use-package protobuf-mode
+  :defer t
+  :config
+  (use-package flycheck-protobuf)
+  (add-hook 'protobuf-mode-hook
+            (lambda ()
+              (highlight-todos)
+              (fci-mode)
+              (eldoc-mode)
+              (subword-mode +1)
+              (anaconda-mode 1))))
+
+
 ;; ###### Shell Scripting #######
 
 ;; Open zsh files in sh-mode
@@ -901,6 +916,7 @@
 (make-face 'font-lock-note-face)
 (defun highlight-todos ()
   "Highlight TODOs and other note tags."
+  (interactive)
   (font-lock-add-keywords nil
    '(("\\<\\(TODO\\)" 1 'font-lock-fixme-face t)
      ("\\<\\(NOTE\\)" 1 'font-lock-note-face t)
