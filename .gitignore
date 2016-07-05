@@ -9,3 +9,8 @@ emacs.d/var
 \#*\#
 *~
 .DS_Store
+/emacs.d/tramp
+/bin/cleanup-java
+/emacs.d/notes
+/emacs.d/bookmarks
+/emacs.d/semanticdb/
