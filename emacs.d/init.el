@@ -174,7 +174,7 @@
   (define-key flycheck-mode-map [remap next-error] 'flycheck-next-error)
   (define-key flycheck-mode-map [remap previous-error] 'flycheck-previous-error)
   ;; I don't like these checkers, they're noisy
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc ruby-rubocop))
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc ruby-rubocop javascript-jscs))
   (setq flycheck-global-modes '(not text-mode))
   (global-flycheck-mode))
 ;; TODO: hotkey for show all errors in other window (C-c ! l right now)
