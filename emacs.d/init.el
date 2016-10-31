@@ -185,6 +185,7 @@
 ;; or add your own!
 ;; TODO: Do I really use this?
 (use-package yasnippet
+  :disabled t
   :diminish yas-minor-mode
   :init
   (setq yas-snippet-dirs
