@@ -79,6 +79,8 @@
         '(git-rebase-mode-hook
           magit-mode-hook
           magit-popup-mode-hook))
+  ;; Turn off auto revert since I use global auto revert mode
+  (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master" "dev"))
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
