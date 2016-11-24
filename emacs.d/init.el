@@ -835,14 +835,12 @@
 (use-package protobuf-mode
   :defer t
   :config
-  (use-package flycheck-protobuf)
   (add-hook 'protobuf-mode-hook
             (lambda ()
               (highlight-todos)
               (fci-mode)
               (eldoc-mode)
-              (subword-mode +1)
-              (anaconda-mode 1))))
+              (subword-mode +1))))
 
 
 ;; ###### Shell Scripting #######
