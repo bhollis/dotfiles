@@ -376,6 +376,18 @@
 (use-package string-edit :defer t)
 
 (use-package yascroll
+  :init
+  ;; https://github.com/m2ym/yascroll-el/pull/17
+  (defcustom yascroll:enabled-window-systems
+    '(nil x w32 ns pc mac)
+    "A list of `window-system's where yascroll can work."
+    :type '(repeat (choice (const :tag "Termcap" nil)
+                           (const :tag "X window" x)
+                           (const :tag "MS-Windows" w32)
+                           (const :tag "Macintosh Cocoa" ns)
+                           (const :tag "Macintosh Emacs Port" mac)
+                           (const :tag "MS-DOS" pc)))
+    :group 'yascroll)
   :config
   (set-face-background 'yascroll:thumb-fringe "#666")
   (set-face-foreground 'yascroll:thumb-fringe "#666")
