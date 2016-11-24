@@ -48,10 +48,9 @@
 ;; Get PATH from shell on OSX, for when we launched from the dock
 (use-package exec-path-from-shell
   :if is-mac
-  :init
-  ;; Don't whine about my environment
-  ;;(setq exec-path-from-shell-check-startup-file nil)
   :config
+  ;; Don't whine about my environment
+  (setq-default exec-path-from-shell-check-startup-file nil)
   (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
   (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
   (add-to-list 'exec-path-from-shell-variables "PYTHONPATH")
@@ -62,8 +61,6 @@
 ;; sufficiently configure them. State them here so they get
 ;; auto-installed (and to make future configuration easier). We could
 ;; restate the autoloads here, but why bother?
-
-;; TODO: sort/organize these by theme
 
 ;; Draw a thin line down the side of the buffer at a certain column.
 (use-package fill-column-indicator
@@ -97,12 +94,6 @@
   :bind
   (("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch-popup)))
-;; Include pull request info in magit
-(use-package magit-gh-pulls
-  :disabled t
-  :commands turn-on-magit-gh-pulls
-  :init
-  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 ;; Helm is a crazy search interface that replaces ido: http://tuhdo.github.io/helm-intro.html
 ;; An important thing to remember is that helm finds stuff *first*, then decides what to do!
@@ -119,7 +110,7 @@
   ;;  (setq helm-M-x-fuzzy-match t)
   ;;  (setq helm-recentf-fuzzy-match t)
   (when (executable-find "curl")
-    (setq helm-net-prefer-curl t))
+    (setq-default helm-net-prefer-curl t))
   :config
   (require 'helm-config)
   (define-key helm-map (kbd "C-]") 'helm-keyboard-quit)
@@ -135,7 +126,6 @@
         (helm-execute-persistent-action)
       (helm-maybe-exit-minibuffer)))
   (define-key helm-find-files-map (kbd "<return>") 'helm-find-files-into-directories)
-  ;; TODO: bind with keymaps: https://github.com/jwiegley/use-package/issues/121
   (helm-mode 1)
   :bind
   (("M-x" . helm-M-x) ; Searchable functions
@@ -143,12 +133,10 @@
    ("C-x C-f" . helm-find-files)
    ("C-x b" . helm-mini) ; helm buffer switch
    ("M-i" . helm-semantic-or-imenu) ; bounce to function/method defs
-   ("C-x c o" . helm-occur) ; Find occurences in buffer
-   ;;("C-x h g" . helm-google-suggest) ; Search the web
+   ("S-F" . helm-occur) ; Find occurences in buffer (cmd-shift-F)
    ;; C-x c a: helm-apropos
    )
 )
-;; TODO: helm flx? helm persistent history?
 
 ;; Project awareness
 ;; http://tuhdo.github.io/helm-projectile.html
@@ -188,29 +176,6 @@
   (global-flycheck-mode))
 ;; TODO: hotkey for show all errors in other window (C-c ! l right now)
 
-;; Snippet insertion - type a snippet abbreviation and hit tab to
-;; expand, or C-c y to bring up a company-mode list of available
-;; snippets. Install snippets from yasnippet-snippets as a submodule,
-;; or add your own!
-;; TODO: Do I really use this?
-(use-package yasnippet
-  :disabled t
-  :diminish yas-minor-mode
-  :init
-  (setq yas-snippet-dirs
-  '("~/.emacs.d/snippets" ;; Personal snippets
-    "~/.emacs.d/yasnippets" ;; https://github.com/AndreaCrotti/yasnippet-snippets
-    ))
-  :config
-  ;; Use C-; for expand instead of tab
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
-  ;; Can restrict to certain modes with:
-  ;; (yas-reload-all)
-  ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
-  (yas-global-mode 1))
-
 ;; Popup autocompletion as you type, a la Eclipse
 (use-package company
   :demand t
@@ -229,18 +194,10 @@
     :config
     (company-flx-mode +1))
   :bind
-  ;("C-c y" . company-yasnippet) ; offer completions for yasnippet
   ("M-<tab>" . company-complete)
   ;; C-w in the menu to see source code!
   ;; C-g to dismiss popup
   )
-
-;; TODO: to prevent completion in comments, you might want to remove company-dabbrev from company-backends altogether
-
-;; Try out hippie-exp in place of completion/dabbrev
-;; TODO: might be too much
-;(use-package hippie-exp
-;  :bind ("M-/" . hippie-expand))
 
 ;; Use M-<arrows> to navigate among windows
 (use-package windmove
@@ -293,7 +250,11 @@
   :config
   (global-discover-mode 1))
 
-;; TODO: Consider discover-my-major as well?
+;; Show keybindings for major and minor modes
+(use-package discover-my-major
+  :bind
+  (("C-h C-m" . discover-my-major)
+   ("C-h M-m" . discover-my-mode)))
 
 ;; Popup help after prefixes, like an automatic discover.el
 ;; https://github.com/kai2nenobu/guide-key
@@ -320,9 +281,11 @@
   (add-hook 'prog-mode-hook 'eldoc-mode))
 
 ;; Enable semantic parsing where applicable
+;; https://www.gnu.org/software/emacs/manual/html_node/semantic/Semantic-mode.html#Semantic-mode
 ;; (use-package semantic
 ;;   :commands semantic-mode
 ;;   :init
+;;   TODO: set this up with proper minor modes
 ;;   (add-hook 'prog-mode-hook 'semantic-mode))
 
 ;; Highlight and auto-clean bad whitespace
@@ -343,14 +306,12 @@
   (setq ediff-split-window-function 'split-window-horizontally)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
-;; TODO: Multiple cursors: https://github.com/magnars/multiple-cursors.el
-
 ;; In programming modes, auto-fill comments, but nothing else.
 (defun comment-auto-fill ()
   "Automatically fill comments, but nothing else"
+  (auto-fill-mode 1)
   (setq-local comment-auto-fill-only-comments t)
-  ;;(auto-fill-mode 1)
-  (turn-off-auto-fill)
+  ;;(turn-off-auto-fill)
   (setq truncate-lines nil)
   (diminish 'auto-fill-function)) ; Unfortunately auto-fill-mode doesn't follow conventions
 (add-hook 'prog-mode-hook 'comment-auto-fill)
@@ -371,6 +332,7 @@
         '(coffee-mode-hook
           python-mode-hook
           haml-mode-hook
+          web-mode-hook
           sass-mode-hook))
   :config
   ;; Just a bit lighter than the background
@@ -383,6 +345,7 @@
 ;; C-c C-c to send them back!
 (use-package string-edit :defer t)
 
+;; A tiny scroll handle that appears when needed
 (use-package yascroll
   :init
   ;; https://github.com/m2ym/yascroll-el/pull/17
@@ -482,15 +445,6 @@
   ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
   ;;               (ggtags-mode 1))))
 
-;;   (mapc (lambda (hook)
-;;           (add-hook hook (lambda () (smartscan-mode -1))))
-;;         '(;;js2-mode-hook
-;;           ruby-mode-hook
-;;           emacs-lisp-mode-hook
-;;           csharp-mode-hook
-;;           python-mode-hook
-;;           objc-mode-hook)))
-
 ;; Google-this command
 ;; https://github.com/Malabarba/emacs-google-this
 (use-package google-this
@@ -498,22 +452,28 @@
   :init
   (google-this-mode 1))
 
-;; TODO: look at Casey/work dotfiles to make compile better
 ;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
-;;(global-set-key (kbd "C-c C-c") 'compile)
-;;(global-set-key "\C-B" 'recompile)
-;;global-set-key "\C-x\C-c" 'switch-to-most-recent-compile-buffer)
 
-
-
+;; Highlight symbol under point (and provide ways of replacing or navigating them.
 ;; TODO: https://github.com/nschum/highlight-symbol.el
-
+;; TODO: better version of this that uses semantic info?
+(use-package highlight-symbol
+  :diminish highlight-symbol-mode
+  :init
+  (setq highlight-symbol-idle-delay .25)
+  (setq highlight-symbol-highlight-single-occurrence nil)
+  :config
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (highlight-symbol-mode)
+              (set-face-attribute 'highlight-symbol-face nil :background "gray20")
+              ))
+  :bind
+  (("s-R" . highlight-symbol-query-replace)))
 
 
 ;; ################## Specific programming language modes #################
 
-
-;; TODO: dig deeper into specific programming languages when I use them
 
 (use-package crontab-mode
   :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
@@ -522,13 +482,11 @@
 (use-package csharp-mode :defer t)
 (use-package markdown-mode :defer t)
 (use-package apache-mode :defer t)
-;; TODO: clojure?
 
 
 ;; ###### Web, templating #######
 
 ;; http://web-mode.org/
-;; TODO: fix awful fonts
 (use-package web-mode
   :init
   (setq-default web-mode-markup-indent-offset 2)
@@ -543,6 +501,10 @@
   :mode
   ("\\.erb\\'"
    "\\.html?\\'"))
+
+;; Haml is a better HTML
+(use-package haml-mode :defer t)
+
 
 ;; ###### Ruby #######
 
@@ -634,6 +596,7 @@
 ;; C-c ,r	Repeat the last verification process.
 ;; C-c ,g	Go to step-definition under point (requires ruby_parser gem >= 2.0.5)
 
+
 ;; ###### Java #######
 
 ;; Java in emacs is never great. I'll probably stick to IntelliJ/Eclipse.
@@ -642,11 +605,11 @@
 ;; TODO: https://github.com/m0smith/malabar-mode
 ;; TODO: https://github.com/skeeto/ant-project-mode
 ;; TODO: https://github.com/skeeto/javadoc-lookup
-;; TODO: groovy/gradle modes?
 ;; TODO: javap mode
 
 (use-package groovy-mode :defer t)
 (use-package gradle-mode :defer t)
+
 
 ;; ###### JavaScript #######
 
@@ -666,18 +629,6 @@
   :interpreter ("node" . js2-mode))
 ;; TODO: non-conflicting jump to definition key
 
-;; JavaScript refactoring. C-c C-r
-(use-package js2-refactor
-  :disabled t ; TODO: this didn't work very well for me
-  :init
-  (add-hook 'js2-mode-hook 'js2-refactor-mode)
-  :config
-  ;; Discover menu support, refactor has a ton of commands
-  (use-package discover-js2-refactor
-    :disabled t ; This doesn't actually work
-    )
-  (js2r-add-keybindings-with-prefix "C-c C-r"))
-
 ;; Tern provides JS autocomplete, function args and other tooling
 ;; http://ternjs.net/
 ;; Must be installed: npm install -g tern
@@ -686,9 +637,6 @@
   :diminish tern-mode
   :init
   (add-hook 'js2-mode-hook 'tern-mode)
-  :config
-  ;; Let js2-refactor do refactorings
-  ;; (define-key tern-mode-keymap (kbd "C-c C-r") nil)
   )
 ;; Tern bindings:
 ;; M-. : go to definition
@@ -701,8 +649,7 @@
   (setq company-tern-property-marker " .")
   (add-to-list 'company-backends 'company-tern))
 
-;; Run NodeJS in an inferior process window TODO: keybindings for repl common
-;; across JS, coffee, etc.
+;; Run NodeJS in an inferior process window
 (use-package nodejs-repl :defer t)
 
 ;; TODO: normalize compile and REPL commands across langs
@@ -715,22 +662,6 @@
   (:map coffee-mode-map
         ;; TODO: this should be some other binding
         ("C-c r" . coffee-compile-region)))
-
-
-;; ###### HTML #######
-
-;; Type Haml-like CSS selectors and hit C-j to expand into full HTML tags
-;; https://github.com/smihica/emmet-mode
-;; html:5 for template?
-(use-package emmet-mode
-  :commands emmet-mode
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-  (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.
-;; TODO: helm-emmet, company-emmet
-
-;; Haml is a better HTML
-(use-package haml-mode :defer t)
 
 
 ;; ###### CSS #######
@@ -749,8 +680,12 @@
 (use-package rainbow-mode
   :commands rainbow-turn-on
   :init
-  (add-hook 'css-mode-hook 'rainbow-turn-on)
-  (add-hook 'sass-mode-hook 'rainbow-turn-on))
+  (mapc (lambda (hook)
+          (add-hook hook 'css-mode-hook 'rainbow-turn-on))
+        '(css-mode-hook
+          sass-mode-hook
+          scss-mode-hook
+          emacs-lisp-mode-hook)))
 
 
 ;; ###### Python #######
@@ -819,6 +754,14 @@
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
+(use-package racer
+  :commands racer-mode
+  :diminish racer-mode
+  :init
+  (setq racer-rust-src-path "<path-to-rust-srcdir>/src/")
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+
 
 ;; ###### Perl #######
 
@@ -839,11 +782,13 @@
 
 
 ;; ###### Protobuf #######
+
 (use-package protobuf-mode
   :defer t
   :config
   (add-hook 'protobuf-mode-hook
             (lambda ()
+              ;; Protobuf isn't a programming mode
               (highlight-todos)
               (fci-mode)
               (eldoc-mode)
@@ -917,14 +862,14 @@
 
 ;; Highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "gray17")
+(set-face-background 'hl-line "gray13")
 
 ;; Highlight searched text
 (setq search-highlight t)
 
 ;; wrap the line in the display if it is wider than the window.
 ;; It's still one 'line' in the file.
-(setq truncate-partial-width-windows 50)
+(setq truncate-partial-width-windows nil)
 (setq-default truncate-lines nil)
 (toggle-truncate-lines -1)
 
@@ -941,7 +886,6 @@
 ;; Show battery level in the mode line.
 (display-battery-mode)
 
-
 ;; Show matching parens/braces
 (show-paren-mode 1)
 
@@ -953,7 +897,7 @@
 ;; Turn on or off a "visible" bell
 (setq visible-bell nil)
 
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; replace "yes" and "no" with "y" and "n"
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -1210,25 +1154,11 @@
 
 ;; ######## Color Theme options #########
 
-;;(use-package ample-theme
-;;  :config
-;;  (load-theme 'ample)
-;;  (load-theme 'ample-flat)
-;;)
-;;(require 'deep-blue) (load-theme 'deep-blue t)
 (use-package color-theme-sanityinc-tomorrow
   :config
   (load-theme 'sanityinc-tomorrow-night t)
   ;; I need the selection to stand out more
   (set-face-attribute 'region nil :background "#6281d0"))
-;;(load-theme 'sanityinc-tomorrow-eighties t)
-;;(load-theme 'solarized-dark t)
-;;(load-theme 'monokai t)
-;;(load-theme 'tango-dark t)
-;;(load-theme 'deeper-blue t)
-;;(load-theme 'misterioso t)
-;;(load-theme 'wombat t)
-
 
 ;; Finally, load a local file to override anything done above on a per-host basis.
 ;; TODO: figure out short hostname here
