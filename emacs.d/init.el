@@ -783,6 +783,23 @@
             (setq c-basic-offset 4)))
 
 
+;; ###### Rust #######
+
+;; TODO: https://github.com/racer-rust/emacs-racer
+;; TODO: http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
+(use-package rust-mode :defer t)
+
+(use-package cargo
+  :commands cargo-minor-mode
+  :init
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+
+(use-package flycheck-rust
+  :commands flycheck-rust-setup
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+
 ;; ###### Perl #######
 
 ;; I hope I don't have to write Perl anymore...
