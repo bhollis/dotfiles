@@ -94,6 +94,7 @@
   ("C-x M-g" . magit-dispatch-popup)))
 ;; Include pull request info in magit
 (use-package magit-gh-pulls
+  :disabled t
   :commands turn-on-magit-gh-pulls
   :init
   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
@@ -152,7 +153,7 @@
   (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
   :config
   (use-package helm-projectile)
-  (projectile-global-mode)
+  (projectile-mode)
   (setq projectile-completion-system 'helm)
   (helm-projectile-on)
   (setq projectile-switch-project-action 'helm-projectile)
