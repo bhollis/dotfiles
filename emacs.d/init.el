@@ -37,15 +37,15 @@
 ;; :bind, :defer, :commands, :mode, :interpreter all cause lazy loading.
 
 ;; Get PATH from shell on OSX, for when we launched from the dock
-(when is-mac
-  (use-package exec-path-from-shell
-    :init
-    (setq exec-path-from-shell-check-startup-file nil)
-    :config
-    (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
-    (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
-    (add-to-list 'exec-path-from-shell-variables "PYTHONPATH")
-    (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :if is-mac
+  :init
+  (setq exec-path-from-shell-check-startup-file nil)
+  :config
+  (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
+  (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
+  (add-to-list 'exec-path-from-shell-variables "PYTHONPATH")
+  (exec-path-from-shell-initialize))
 
 ;; package.el will automatically create and require autoloads files
 ;; for packages. Many of these have package autoloads that
@@ -277,11 +277,11 @@
 
 ;; Quickly look stuff up in Dash (only on OSX)
 ;; https://kapeli.com/dash
-(when is-mac
-  (use-package dash-at-point
-    :bind
-    (("C-c d" . dash-at-point)
-     ("C-c e" . dash-at-point-with-docset))))
+(use-package dash-at-point
+  :if is-mac
+  :bind
+  (("C-c d" . dash-at-point)
+   ("C-c e" . dash-at-point-with-docset)))
 
 ;; A help menu available for some packages - press ? in dired
 (use-package discover
