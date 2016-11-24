@@ -70,7 +70,7 @@ source ~/.dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], 
 export LESS='-FRiX' # quit if one screen, color, case insensitive searching
 export PAGER=less
 export EDITOR='ec'
-export PATH=~/bin:$PATH:/usr/local/share/npm/bin
+export PATH=~/bin:$PATH:/usr/local/share/npm/bin:~/.cargo/bin
 export GTAGSLABEL='ctags'
 
 #################### coloring matters ########################
