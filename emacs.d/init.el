@@ -498,6 +498,13 @@
 ;;           python-mode-hook
 ;;           objc-mode-hook)))
 
+;; Google-this command
+;; https://github.com/Malabarba/emacs-google-this
+(use-package google-this
+  :diminish google-this-mode
+  :init
+  (google-this-mode 1))
+
 ;; TODO: look at Casey/work dotfiles to make compile better
 ;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
 ;;(global-set-key (kbd "C-c C-c") 'compile)
