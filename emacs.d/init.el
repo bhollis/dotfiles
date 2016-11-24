@@ -699,9 +699,10 @@
 ;; Coffeescript is a friendlier JavaScript
 (use-package coffee-mode
   :defer t
-  :config
-  ;; TODO: this should be some other binding
-  (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
+  :bind
+  (:map coffee-mode-map
+        ;; TODO: this should be some other binding
+        ("C-c r" . coffee-compile-region)))
 
 
 ;; ###### HTML #######
