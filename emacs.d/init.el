@@ -658,10 +658,8 @@
 ;; Coffeescript is a friendlier JavaScript
 (use-package coffee-mode
   :defer t
-  :bind
-  (:map coffee-mode-map
-        ;; TODO: this should be some other binding
-        ("C-c r" . coffee-compile-region)))
+  :config
+  (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
 
 
 ;; ###### CSS #######
@@ -681,7 +679,7 @@
   :commands rainbow-turn-on
   :init
   (mapc (lambda (hook)
-          (add-hook hook 'css-mode-hook 'rainbow-turn-on))
+          (add-hook hook 'rainbow-turn-on))
         '(css-mode-hook
           sass-mode-hook
           scss-mode-hook
