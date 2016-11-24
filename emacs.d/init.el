@@ -907,7 +907,8 @@
 (show-paren-mode 1)
 
 ;; TODO: Mac options. Copy/paste still doesn't work quite right either.
-;;(setq mac-command-modifier 'meta)
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'meta)
 ;;(setq mac-command-key-is-meta t) ; yikes, not sure if I can deal with this
 
 ;; Turn on or off a "visible" bell
@@ -1038,6 +1039,15 @@
 (global-unset-key (kbd "s-p")) ;; Mac print
 (global-unset-key (kbd "s-q")) ;; Quit
 (global-unset-key (kbd "s-t")) ;; Fonts?
+
+;; Typical Mac bindings
+(when is-mac
+  (global-set-key [(super a)] 'mark-whole-buffer)
+  (global-set-key [(super v)] 'yank)
+  (global-set-key [(super c)] 'kill-ring-save)
+  (global-set-key [(super s)] 'save-buffer)
+  (global-set-key [(super l)] 'goto-line)
+  (global-set-key [(super z)] 'undo))
 
 ;; other stuff...
 (global-set-key "\C-c\C-s" 'new-shell)
