@@ -72,13 +72,6 @@
   (setq-default fci-rule-column 79)
   (add-hook 'prog-mode-hook 'fci-mode))
 
-;; Color color names and #ABCs with their actual colors.
-(use-package rainbow-mode
-  :commands rainbow-turn-on
-  :init
-  (add-hook 'css-mode-hook 'rainbow-turn-on)
-  (add-hook 'sass-mode-hook 'rainbow-turn-on))
-
 ;; Do all your git tasks from emacs. Never use git CLI again.
 ;; http://daemianmack.com/magit-cheatsheet.html
 (use-package magit
@@ -751,6 +744,13 @@
   :commands turn-on-css-eldoc
   :init
   (add-hook 'css-mode-hook 'turn-on-css-eldoc))
+
+;; Colorize color names and #ABCs with their actual colors.
+(use-package rainbow-mode
+  :commands rainbow-turn-on
+  :init
+  (add-hook 'css-mode-hook 'rainbow-turn-on)
+  (add-hook 'sass-mode-hook 'rainbow-turn-on))
 
 
 ;; ###### Python #######
