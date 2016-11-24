@@ -8,7 +8,11 @@
 ;; Are we on a mac (windowed)?
 (defconst is-mac (memq window-system '(mac ns)))
 
+;; ###### Bytecode Compiling #######
 
+;; Always load the newer file, even if the bytecode file exists, so we
+;; never end up loading an out-of-date bytecode file.
+(setq load-prefer-newer t)
 
 ;; ###### Package Management (ELPA) #######
 
@@ -28,6 +32,11 @@
 (setq use-package-always-ensure t)
 ;; To manually manage packages: M-x package-list-packages
 
+;; Auto-compile elisp to bytecode. This should be as early as possible.
+(use-package auto-compile
+  :init
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
 
 
 ;; ######## Configure general packages #######
