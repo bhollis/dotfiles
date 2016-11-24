@@ -49,7 +49,8 @@
 (use-package exec-path-from-shell
   :if is-mac
   :init
-  (setq exec-path-from-shell-check-startup-file nil)
+  ;; Don't whine about my environment
+  ;;(setq exec-path-from-shell-check-startup-file nil)
   :config
   (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
   (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
@@ -125,7 +126,7 @@
   ;;  (setq helm-M-x-fuzzy-match t)
   ;;  (setq helm-recentf-fuzzy-match t)
   (when (executable-find "curl")
-    (setq helm-google-suggest-use-curl-p t))
+    (setq helm-net-prefer-curl t))
   :config
   (require 'helm-config)
   (define-key helm-map (kbd "C-]") 'helm-keyboard-quit)
