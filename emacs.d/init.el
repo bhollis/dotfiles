@@ -309,9 +309,9 @@
 ;; In programming modes, auto-fill comments, but nothing else.
 (defun comment-auto-fill ()
   "Automatically fill comments, but nothing else"
-  (auto-fill-mode 1)
+  ;;(auto-fill-mode 1)
   (setq-local comment-auto-fill-only-comments t)
-  ;;(turn-off-auto-fill)
+  (turn-off-auto-fill)
   (setq truncate-lines nil)
   (diminish 'auto-fill-function)) ; Unfortunately auto-fill-mode doesn't follow conventions
 (add-hook 'prog-mode-hook 'comment-auto-fill)
