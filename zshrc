@@ -59,6 +59,8 @@ if [ ! -f ~/bin/ec ]; then
     alias ec='emacsclient -a "emacs -nw"' # open in existing emacs, wait for C-x C-#
 fi
 alias e='emacs -nw'
+alias ack='/usr/local/bin/rg'
+alias rg='/usr/local/bin/rg'
 
 ########################### prompt ###################################
 source ~/.dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], BG[int] to use

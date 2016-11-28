@@ -150,6 +150,8 @@
   (setq projectile-completion-system 'helm)
   (helm-projectile-on)
   (setq projectile-switch-project-action 'helm-projectile)
+  ;; Use ripgrep instead of ag instead of ack
+  (setq helm-grep-ag-command "/usr/local/bin/rg --smart-case --no-heading --line-number %s %s %s")
   :bind
   ;; Bind some "override" or shift-modified versions of familiar
   ;; commands to project-oriented versions
@@ -158,8 +160,18 @@
    ;; C-c p b: switch buffers
    ;; C-c p a: find other file
    ;; C-c p k: kill open buffers for project
-   ("C-x a" . helm-projectile-ack)) ; Search project with ack
-)
+  ))
+
+;; Really we'll use ripgrep which is a faster ag which is a faster ack
+(use-package helm-ag
+  :defer t
+  :init
+  (setq helm-ag-base-command "/usr/local/bin/rg --vimgrep --no-heading")
+  :bind
+  (("C-x a" . helm-do-ag-project-root)
+   ("C-x C-a" . helm-do-ag)
+   ))
+
 
 ;; Show syntax errors and warnings inline, on the fly. Add
 ;; backends to support more languages
