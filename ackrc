@@ -4,3 +4,5 @@
 --ignore-directory=is:.idea
 --ignore-directory=is:.cache
 --ignore-directory=is:.sass-cache
+--ignore-directory=is:build
+--ignore-directory=is:buck-out

@@ -83,8 +83,7 @@ brew update
 which ack || brew install ack
 which node || brew install node
 which wget || brew install wget
-which rg || (brew tap burntsushi/ripgrep
-             https://github.com/BurntSushi/ripgrep.git && brew install burntsushi/ripgrep/ripgrep-bin)
+which rg || (brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git && brew install burntsushi/ripgrep/ripgrep-bin)
 
 # rvm, ruby, python
 # cask?
