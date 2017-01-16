@@ -166,7 +166,7 @@
 (use-package helm-ag
   :defer t
   :init
-  (setq helm-ag-base-command "/usr/local/bin/rg --vimgrep --no-heading")
+  (setq helm-ag-base-command "/usr/local/bin/rg --smart-case --vimgrep --no-heading")
   :bind
   (("C-x a" . helm-do-ag-project-root)
    ("C-x C-a" . helm-do-ag)
