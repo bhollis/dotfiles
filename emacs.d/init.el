@@ -183,7 +183,8 @@
   (setq-default flycheck-disabled-checkers
                 '(emacs-lisp-checkdoc
                   ruby-rubocop
-                  javascript-jscs))
+                  javascript-jscs
+                  javascript-jshint))
   (setq flycheck-global-modes '(not text-mode))
   (global-flycheck-mode))
 ;; TODO: hotkey for show all errors in other window (C-c ! l right now)
