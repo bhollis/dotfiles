@@ -888,6 +888,10 @@
 (setq-default mode-line-modified '("%*%* "))
 (setq-default mode-line-buffer-identification '("%b"))
 
+;; Remove "Git" from modeline
+(setcdr (assq 'vc-mode mode-line-format)
+        '((:eval (replace-regexp-in-string "^ Git:" " " vc-mode))))
+
 ;; Don't tell me about mail (you can't read GMail anyway)
 (setq-default display-time-mail-file -1)
 ;; Don't tell me about system load, either. I have lots of cores.
