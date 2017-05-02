@@ -443,6 +443,22 @@
             (lambda ()
               (subword-mode 1))))
 
+;; A lightweight tags replacement using search
+(use-package dumb-jump
+  :config
+  (setq dumb-jump-selector 'helm)
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("s-[" . dumb-jump-back)))
+
+;; Bind Cmd-click to dumb-jump just like in IntelliJ
+(defun dumb-jump-at-point (event)
+  "Move point and then jump to definition"
+  (interactive "e")
+  (mouse-set-point event)
+  (dumb-jump-go))
+
+(global-set-key (kbd "s-<mouse-1>") 'dumb-jump-at-point)
 
 ;; GNU Global Tags - search for code
 ;; M-. to find tag
