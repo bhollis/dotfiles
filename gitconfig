@@ -47,7 +47,11 @@
   default = upstream
 [advice]
   statusHints = false
+
 [filter "lfs"]
   smudge = git-lfs smudge %f
   required = true
   clean = git-lfs clean %f
+
+[includeIf "gitdir:~/Snapchat/"]
+  path = .dotfiles/gitconfig-work

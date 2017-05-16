@@ -80,10 +80,10 @@ git submodule update --init --recursive
 which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor || echo "Pay attention to these errors!"
 brew update
-which ack || brew install ack
 which node || brew install node
 which wget || brew install wget
 which rg || (brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git && brew install burntsushi/ripgrep/ripgrep-bin)
+brew tap d12frosted/emacs-plus
 brew install emacs-plus --without-spacemacs-icon
 brew linkapps emacs-plus
 
