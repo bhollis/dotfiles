@@ -73,9 +73,12 @@
 ;; http://daemianmack.com/magit-cheatsheet.html
 (use-package magit
   :init
-  ;; Turn off smartscan in magit
   (mapc (lambda (hook)
-          (add-hook hook (lambda () (smartscan-mode -1))))
+          (add-hook hook (lambda ()
+                           ;; Turn off smartscan
+                           (smartscan-mode -1)
+                           ;; Let C-c a be ripgrep
+                           (local-unset-key (kbd "C-c a")))))
         '(git-rebase-mode-hook
           magit-mode-hook
           magit-popup-mode-hook))
@@ -104,11 +107,9 @@
   :init
   (setq helm-split-window-in-side-p t)
   (setq helm-autoresize-mode t)
-  ;; TODO: Apparently this crashes emacs 24.5 - don't want to mess with emacs from Homebrew yet.
-  ;; https://github.com/bbatsov/projectile/issues/600
-  ;;  (setq helm-buffers-fuzzy-matching t)
-  ;;  (setq helm-M-x-fuzzy-match t)
-  ;;  (setq helm-recentf-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-recentf-fuzzy-match t)
   (when (executable-find "curl")
     (setq-default helm-net-prefer-curl t))
   :config
@@ -785,7 +786,7 @@
   :commands racer-mode
   :diminish racer-mode
   :init
-  (setq racer-rust-src-path "<path-to-rust-srcdir>/src/")
+  (setq racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/")
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
 
