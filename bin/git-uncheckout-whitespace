@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git diff -b --numstat \
+| egrep $'^0\t0\t' \
+| cut -d$'\t' -f3- \
+| xargs git checkout HEAD --
