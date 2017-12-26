@@ -143,6 +143,7 @@
 ;; http://tuhdo.github.io/helm-projectile.html
 ;; Get into it with C-c p p and C-c p h
 (use-package projectile
+  :diminish helm-mode
   :init
   (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
   :config
@@ -165,6 +166,7 @@
 
 ;; Really we'll use ripgrep which is a faster ag which is a faster ack
 (use-package helm-ag
+  :diminish helm-mode
   :defer t
   :init
   (setq helm-ag-base-command "/usr/local/bin/rg --smart-case --vimgrep --no-heading")
