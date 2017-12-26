@@ -27,6 +27,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; Allow use-package to remove mode-lines
+(require 'diminish)
+
 ;; use-package will automatically install missing packages
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -37,7 +40,6 @@
   :init
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
-
 
 ;; ######## Configure general packages #######
 
@@ -85,7 +87,7 @@
   ;; Turn off auto revert since I use global auto revert mode
   (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
-  (setq magit-branch-prefer-remote-upstream '("master" "dev"))
+  (setq magit-branch-prefer-remote-upstream '("master"))
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
   (advice-add 'magit-popup-mode-display-buffer :around
@@ -105,7 +107,7 @@
   :diminish helm-mode
   :defines helm-find-files-map
   :init
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   (setq helm-autoresize-mode t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-M-x-fuzzy-match t)
@@ -127,6 +129,8 @@
         (helm-execute-persistent-action)
       (helm-maybe-exit-minibuffer)))
   (define-key helm-find-files-map (kbd "<return>") 'helm-find-files-into-directories)
+  ;; Use ripgrep instead of ag instead of ack
+  (setq helm-grep-ag-command "/usr/local/bin/rg --smart-case --no-heading --line-number %s %s %s")
   (helm-mode 1)
   :bind
   (("M-x" . helm-M-x) ; Searchable functions
@@ -141,9 +145,8 @@
 
 ;; Project awareness
 ;; http://tuhdo.github.io/helm-projectile.html
-;; Get into it with C-c p p and C-c p h
+;; Get into it with C-c p p and C-x C-b
 (use-package projectile
-  :diminish helm-mode
   :init
   (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
   :config
@@ -152,8 +155,6 @@
   (setq projectile-completion-system 'helm)
   (helm-projectile-on)
   (setq projectile-switch-project-action 'helm-projectile)
-  ;; Use ripgrep instead of ag instead of ack
-  (setq helm-grep-ag-command "/usr/local/bin/rg --smart-case --no-heading --line-number %s %s %s")
   :bind
   ;; Bind some "override" or shift-modified versions of familiar
   ;; commands to project-oriented versions
@@ -166,13 +167,12 @@
 
 ;; Really we'll use ripgrep which is a faster ag which is a faster ack
 (use-package helm-ag
-  :diminish helm-mode
   :defer t
   :init
   (setq helm-ag-base-command "/usr/local/bin/rg --smart-case --vimgrep --no-heading")
   :bind
   (("C-x a" . helm-do-ag-project-root)
-   ("C-x C-a" . helm-do-ag)
+   ("C-x A" . helm-do-ag)
    ))
 
 
@@ -214,11 +214,6 @@
   ;; C-w in the menu to see source code!
   ;; C-g to dismiss popup
   )
-
-;; Use M-<arrows> to navigate among windows
-(use-package windmove
-  :config
-  (windmove-default-keybindings 'meta))
 
 ;; Move buffers around with M-Shift-<arrows>
 (use-package buffer-move
@@ -412,7 +407,7 @@
   (("C-c C-c" . compile)
    ("C-c C-r" . recompile)))
 
-;; C-c r to rotate among lists of text tokens
+;; C-c t to rotate among lists of text tokens
 (use-package rotate-text
   :load-path "lisp/"
   :ensure nil
@@ -441,7 +436,7 @@
 ;; navigate between words in CamelCase, etc.
 (use-package subword
   :diminish subword-mode
-  :config
+  :init
   (add-hook 'prog-mode-hook
             (lambda ()
               (subword-mode 1))))
@@ -463,27 +458,6 @@
 
 (global-set-key (kbd "s-<mouse-1>") 'dumb-jump-at-point)
 
-;; GNU Global Tags - search for code
-;; M-. to find tag
-;;    brew install global --with-ctags --with-pygments
-(use-package ggtags
-  :defer t
-  :bind
-  ;; Cmd-O like in IntelliJ
-  ("s-o" . ggtags-find-tag-dwim))
-  ;; :init
-  ;; (add-hook 'c-mode-common-hook
-  ;;           (lambda ()
-  ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-  ;;               (ggtags-mode 1))))
-
-;; Google-this command
-;; https://github.com/Malabarba/emacs-google-this
-(use-package google-this
-  :diminish google-this-mode
-  :init
-  (google-this-mode 1))
-
 ;; TODO: re-run last command http://stackoverflow.com/questions/275842/is-there-a-repeat-last-command-in-emacs
 
 ;; Highlight symbol under point (and provide ways of replacing or navigating them.
@@ -494,7 +468,6 @@
   :init
   (setq highlight-symbol-idle-delay .25)
   (setq highlight-symbol-highlight-single-occurrence nil)
-  :config
   (add-hook 'prog-mode-hook
             (lambda ()
               (highlight-symbol-mode)
@@ -507,8 +480,8 @@
 ;; ################## Specific programming language modes #################
 
 
-(use-package crontab-mode
-  :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
+;;(use-package crontab-mode
+;;  :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
 (use-package php-mode :defer t)
 (use-package yaml-mode :defer t)
 (use-package csharp-mode :defer t)
@@ -604,7 +577,7 @@
 
 ;; Provide a command for switching between old and new hash syntax.
 (use-package ruby-hash-syntax
-  :commands ruby-toggle-hash-syntax)
+  :commands ruby-hash-syntax-toggle)
 
 ;; Support YARD documentation syntax
 (use-package yard-mode
@@ -631,7 +604,7 @@
 
 ;; ###### Java #######
 
-;; Java in emacs is never great. I'll probably stick to IntelliJ/Eclipse.
+;; Java in emacs is never great. I'll probably stick to IntelliJ.
 
 ;; TODO: https://github.com/senny/emacs-eclim
 ;; TODO: https://github.com/m0smith/malabar-mode
@@ -654,7 +627,7 @@
   (setq js2-skip-preprocessor-directives t) ; Allow shebangs!
   (setq js-indent-level 2)
   (setq js2-basic-offset 2)
-  (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
+  (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS")))
   :config
   :mode (("\\.js$" . js2-mode)
    ("\\.jsx$" . js2-jsx-mode))
@@ -849,7 +822,7 @@
 (setq tramp-auto-save-directory auto-save-directory); auto-save tramp files in local directory
 
 ;; Use the system clipboard for selections.
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; Default font
 (add-to-list 'default-frame-alist '(font .  "Hack-13" ))
@@ -1092,22 +1065,6 @@
   "Load the TODO file."
   (interactive)
   (find-file bhollis-todo-file))
-
-(defvar bhollis-log-file "/Users/brh/Dropbox/Notes/log.txt")
-(defun insert-timeofday ()
-  "Insert the time of day at the current point, with a separator."
-   (interactive "*")
-   (insert (format-time-string "---------------- %a, %d %b %y: %I:%M%p")))
-(defun load-log ()
-  "Load the log file and add a new entry."
-  (interactive)
-  (find-file bhollis-log-file)
-  (goto-char (point-max))
-  (newline-and-indent)
-  (insert-timeofday)
-  (newline-and-indent)
-  (newline-and-indent)
-  (goto-char (point-max)))
 
 ; Navigation
 (defun previous-blank-line ()
