@@ -27,13 +27,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Allow use-package to remove mode-lines
-(require 'diminish)
-
 ;; use-package will automatically install missing packages
 (require 'use-package)
 (setq use-package-always-ensure t)
 ;; To manually manage packages: M-x package-list-packages
+
+;; Allow use-package to remove mode-lines
+(use-package diminish)
 
 ;; Auto-compile elisp to bytecode. This should be as early as possible.
 (use-package auto-compile
@@ -224,11 +224,11 @@
    ("<M-S-right>" . buf-move-right)))
 
 ;; Increase/decrease font size for all of emacs using C-x C-+/-
-(use-package zoom-frm
-  :bind
-  (("C-x C-=" . zoom-frm-in)
-   ("C-x C--" . zoom-frm-out)
-   ("C-x C-0" . zoom-frm-unzoom)))
+;;(use-package zoom-frm
+;;  :bind
+;;  (("C-x C-=" . zoom-frm-in)
+;;   ("C-x C--" . zoom-frm-out)
+;;   ("C-x C-0" . zoom-frm-unzoom)))
 
 ;; super-up/down to semantically expand/contract selection
 (use-package expand-region
