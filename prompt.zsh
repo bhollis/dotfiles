@@ -575,6 +575,20 @@ _lp_git_branch_color()
 }
 
 ##################
+# Kubernetes     #
+##################
+
+# Get the current kubernetes context
+_lp_kube_context()
+{
+    local context
+    context="$(kubectl config current-context | cut -d '_' -f 4)"
+    if [[ -n "$context" ]] ; then
+        echo -n "${LP_COLOR_TIME}($context)${NO_COL}"
+    fi
+}
+
+##################
 # Battery status #
 ##################
 
@@ -932,6 +946,7 @@ _lp_set_prompt()
         PS1="${PS1}${LP_USER}${LP_HOST} "
     fi
 
+    LP_KUBE="$(_lp_kube_context)"
     PS1="${PS1}${LP_PWD}${LP_SCLS}${LP_VENV}${LP_PROXY}"
 
     # Add VCS infos
@@ -950,7 +965,7 @@ _lp_set_prompt()
     PS1="${LP_TITLE}${PS1}"
 
     # add title escape time, jobs, load and battery to rprompt
-    RPROMPT="${LP_JOBS}${LP_BATT}${LP_TIME}"
+    RPROMPT="${LP_KUBE}${LP_JOBS}${LP_BATT}${LP_TIME}"
 }
 
 prompt_tag()
