@@ -61,6 +61,7 @@ fi
 alias e='emacs -nw'
 alias ack='/usr/local/bin/rg'
 alias rg='/usr/local/bin/rg'
+alias k='kubectl'
 
 ########################### prompt ###################################
 source ~/.dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], BG[int] to use
@@ -160,3 +161,6 @@ fi
 
 # added by travis gem
 [ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+
+# kubectl completions
+which kubectl && source <(kubectl completion zsh)
