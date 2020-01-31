@@ -43,6 +43,10 @@
 
 ;; ######## Configure general packages #######
 
+;; Allow use-package to remove mode-lines
+(use-package diminish)
+(require 'diminish)
+
 ;; Use-package:
 ;; :init runs before require, :config runs after (lazy) loading.
 ;; :bind, :defer, :commands, :mode, :interpreter all cause lazy loading.
@@ -88,6 +92,7 @@
   (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master"))
+  ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
   (advice-add 'magit-popup-mode-display-buffer :around
@@ -98,7 +103,7 @@
   (global-magit-file-mode)
   :bind
   (("C-x g" . magit-status)
-  ("C-x M-g" . magit-dispatch-popup)))
+  ("C-x M-g" . magit-dispatch)))
 
 ;; Helm is a crazy search interface that replaces ido: http://tuhdo.github.io/helm-intro.html
 ;; An important thing to remember is that helm finds stuff *first*, then decides what to do!
@@ -238,11 +243,11 @@
 
 ;; Turn annoying windows like *help* into popup windows that can be
 ;; closed with q or C-g!
-(use-package popwin
-  :config
+;;(use-package popwin
+;;  :config
   ;; Hey, I like full side-by-side compile buffers, so leave 'em alone
-  (delete '(compilation-mode :noselect t) popwin:special-display-config)
-  (popwin-mode 1))
+;;  (delete '(compilation-mode :noselect t) popwin:special-display-config)
+;;  (popwin-mode 1))
 
 ;; Simple REST client / HTTP explorer
 ;; https://github.com/pashky/restclient.el
@@ -666,6 +671,14 @@
   :config
   (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
 
+
+
+;; ###### TypeScript #######
+
+;;(use-package tide
+;;  :init
+;;  (tide-setup)
+;;  (tide-hl-identifier-mode +1))
 
 ;; ###### CSS #######
 
