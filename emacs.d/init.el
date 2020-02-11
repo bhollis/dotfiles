@@ -92,6 +92,7 @@
   (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master"))
+  (setq magit-list-refs-sortby "-committerdate")
   ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
