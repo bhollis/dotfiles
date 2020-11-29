@@ -1,5 +1,8 @@
 ;; Everything's in one file to make it easier to find.
 ;; Remember that you can always add a .dir-locals.el file to any directory to override vars for a project.
+
+;; brew install emacs-plus
+
 ;; TODO: slim this down for console!
 
 
