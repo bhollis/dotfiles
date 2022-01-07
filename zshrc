@@ -75,6 +75,8 @@ export PAGER=less
 export EDITOR='ec'
 export PATH=~/bin:$PATH:/usr/local/share/npm/bin:~/.cargo/bin
 export GTAGSLABEL='ctags'
+export GPG_TTY=$(tty)
+
 
 #################### coloring matters ########################
 # Color codes: 00;{30,31,32,33,34,35,36,37} and 01;{30,31,32,33,34,35,36,37}
