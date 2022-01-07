@@ -65,7 +65,16 @@ if [ "$OS" = Darwin ]; then
     brew update
     which node || brew install node
     which rg || brew install ripgrep
-    which gpg || brew install gpg
+
+    # https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
+    if type "gpg" > /dev/null; then
+        brew install gnupg
+        brew install pinentry-mac
+        echo "pinentry-program /opt/homebrew/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+        # echo "test" | gpg --clearsign
+    fi
+
+    which shellcheck || brew install shellcheck
     # replace the builtin git
     brew install git
     brew tap d12frosted/emacs-plus
