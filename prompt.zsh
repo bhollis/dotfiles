@@ -582,9 +582,11 @@ _lp_git_branch_color()
 _lp_kube_context()
 {
     local context
-    context="$(kubectl config current-context | cut -d '_' -f 4)"
-    if [[ -n "$context" ]] ; then
-        echo -n "${LP_COLOR_TIME}($context)${NO_COL}"
+    if type "kubectl" > /dev/null; then
+        context="$(kubectl config current-context | cut -d '_' -f 4)"
+        if [[ -n "$context" ]] ; then
+            echo -n "${LP_COLOR_TIME}($context)${NO_COL}"
+        fi
     fi
 }
 

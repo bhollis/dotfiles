@@ -7,7 +7,7 @@ if [ -f /etc/profile ]; then
 fi
 
 ##################### functions ######################################
-fpath=( "$HOME/.dotfiles/zfunctions" $fpath )
+fpath=( "$HOME/dotfiles/zfunctions" $fpath )
 
 ######################### zsh options ################################
 setopt ALWAYS_TO_END           # Push that cursor on completions.
@@ -64,10 +64,10 @@ alias rg='/usr/local/bin/rg'
 alias k='kubectl'
 
 ########################### prompt ###################################
-source ~/.dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], BG[int] to use
+source ~/dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], BG[int] to use
 # TODO: set ls colors and such using this
 
-[[ $- = *i* ]] && source ~/.dotfiles/prompt.zsh
+[[ $- = *i* ]] && source ~/dotfiles/prompt.zsh
 
 ###################### environment variables #########################
 export LESS='-FRiX' # quit if one screen, color, case insensitive searching
@@ -138,14 +138,14 @@ esac
 
 # Load a platform-specific zshrc, such as .Darwin.zshrc
 platform=`uname`
-if [ -f ~/.dotfiles/$platform.zshrc ]; then
-    source ~/.dotfiles/$platform.zshrc
+if [ -f ~/dotfiles/$platform.zshrc ]; then
+    source ~/dotfiles/$platform.zshrc
 fi
 
 # Host-specific zshrc, such as .legion.zshrc
 SHORTHOST=${HOST/\.local/}
-if [ -f ~/.dotfiles/$SHORTHOST.zshrc ]; then
-    source ~/.dotfiles/$SHORTHOST.zshrc
+if [ -f ~/dotfiles/$SHORTHOST.zshrc ]; then
+    source ~/dotfiles/$SHORTHOST.zshrc
 fi
 
 # Uncommitted local zshrc
@@ -159,8 +159,7 @@ fi
 
 [[ $- = *i* ]] && prompt_on
 
-# added by travis gem
-[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
-
 # kubectl completions
-which kubectl && source <(kubectl completion zsh)
+if type "kubectl" > /dev/null; then
+  source <(kubectl completion zsh)
+fi

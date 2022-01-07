@@ -2,8 +2,6 @@
 
 # What's the one that forces variables to be defined?
 
-# Create .dotfiles symlink? (should this be elsewhere?)
-
 # Detect OS, machine, user, dreamhost, etc
 # Work vs home?
 # remove ".local", etc
@@ -13,8 +11,6 @@
 # Concatenate dotfiles? includes? substitutions?
 
 # Copy symlinks
-
-# TODO: dotfiles instead of .dotfiles?
 
 DOTFILES_PATH=$PWD
 SHORTHOST=${HOST/\.local/}
@@ -29,9 +25,6 @@ case $(uname) in
 esac
 
 # for x in y?
-ln -s -f "$DOTFILES_PATH/ackrc" ~/.ackrc
-mkdir -p ~/.bundle/
-ln -s -f "$DOTFILES_PATH/bundle_config" ~/.bundle/config
 rm -f ~/.emacs
 rm -f ~/.emacs.d
 ln -s -F "$DOTFILES_PATH/emacs.d" ~/.emacs.d
@@ -59,43 +52,25 @@ rm -f ~/*(-@D) || echo "No broken symlinks in ~"
 # if Mac, suppress login thing
 touch ~/.hushlogin
 
-# Subfolders or prefixes per machine?
-
-# zcompile?
-# emacs byte compile
-#emacs --batch --eval "(byte-recompile-directory \"~/.emacs.d\" 0 1)"
-#emacs --batch --eval "(byte-compile-file \"~/.emacs\")"
-
 # on mac, write prefs? customizations.txt? Brewfile?
-
-# apply patches??
-
-# How to handle things like SSH keys, .gem/credentials, netrc, .relish, .gitconfig etc?
 
 # Update submodules
 git submodule update --init --recursive
 
 # TODO Homebrew on OSX
 # if osx:
-which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew doctor || echo "Pay attention to these errors!"
-brew update
-which node || brew install node
-which wget || brew install wget
-which rg || (brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git && brew install burntsushi/ripgrep/ripgrep-bin)
-brew tap d12frosted/emacs-plus
-brew install emacs-plus --without-spacemacs-icon
-brew linkapps emacs-plus
+if [ "$OS" = Darwin ]; then
+    which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    which brew || eval "$(/opt/homebrew/bin/brew shellenv)"
+    brew doctor || echo "Pay attention to these errors!"
+    brew update
+    which node || brew install node
+    which rg || brew install ripgrep
+    brew tap d12frosted/emacs-plus
+    brew install emacs-plus --with-nobu417-big-sur-icon
+    ln -s /opt/homebrew/opt/emacs-plus@27/Emacs.app /Applications
+    brew services start d12frosted/emacs-plus/emacs-plus@27
 
-# rvm, ruby, python
-# cask?
-
-# TODO: npm installs, gem installs, etc
-# gem install rubocop
-npm install -g tern
-npm install -g coffee-script
-npm install -g coffeelint
-npm install -g bower
-npm install -g eslint
-npm install -g grunt-cli
-npm install -g svgo
+    # TODO: set up keyboard shortcuts, Terminal preferences
+    # TODO: VSCode
+fi
