@@ -84,4 +84,6 @@ if [ "$OS" = Darwin ]; then
 
     # TODO: set up keyboard shortcuts, Terminal preferences
     # TODO: VSCode
+
+    defaults write com.apple.screencapture location ~/Pictures/Screenshots
 fi
