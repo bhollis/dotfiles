@@ -583,7 +583,7 @@ _lp_kube_context()
 {
     local context
     if type "kubectl" > /dev/null; then
-        context="$(kubectl config current-context | cut -d '_' -f 4)"
+        context="$(kubectl config current-context 2>/dev/null | cut -d '_' -f 4)"
         if [[ -n "$context" ]] ; then
             echo -n "${LP_COLOR_TIME}($context)${NO_COL}"
         fi
