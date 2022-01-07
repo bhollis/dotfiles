@@ -1,1 +1,2 @@
-((magit-show-refs "--sort=-committerdate"))
+((magit-pull "--rebase")
+ (magit-show-refs "--sort=-committerdate"))
