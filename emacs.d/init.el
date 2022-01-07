@@ -254,14 +254,6 @@
 ;; https://github.com/pashky/restclient.el
 (use-package restclient :defer t)
 
-;; Quickly look stuff up in Dash (only on OSX)
-;; https://kapeli.com/dash
-(use-package dash-at-point
-  :if is-mac
-  :bind
-  (("C-c d" . dash-at-point)
-   ("C-c e" . dash-at-point-with-docset)))
-
 ;; A help menu available for some packages - press ? in dired
 (use-package discover
   :config
@@ -488,33 +480,33 @@
 
 ;;(use-package crontab-mode
 ;;  :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
-(use-package php-mode :defer t)
-(use-package yaml-mode :defer t)
-(use-package csharp-mode :defer t)
-(use-package markdown-mode :defer t)
-(use-package apache-mode :defer t)
+;(use-package php-mode :defer t)
+;(use-package yaml-mode :defer t)
+;(use-package csharp-mode :defer t)
+;(use-package markdown-mode :defer t)
+;(use-package apache-mode :defer t)
 
 
 ;; ###### Web, templating #######
 
 ;; http://web-mode.org/
-(use-package web-mode
-  :init
-  (setq-default web-mode-markup-indent-offset 2)
-  (setq-default web-mode-css-indent-offset 2)
-  (setq-default web-mode-code-indent-offset 2)
-  (setq-default web-mode-enable-current-element-highlight t)
-  :config
-  ;; fci-mode appears to mess up web-mode indentation
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (turn-off-fci-mode)))
-  :mode
-  ("\\.erb\\'"
-   "\\.html?\\'"))
+;(use-package web-mode
+;  :init
+;  (setq-default web-mode-markup-indent-offset 2)
+;  (setq-default web-mode-css-indent-offset 2)
+;  (setq-default web-mode-code-indent-offset 2)
+;  (setq-default web-mode-enable-current-element-highlight t)
+;  :config
+;  ;; fci-mode appears to mess up web-mode indentation
+;  (add-hook 'web-mode-hook
+;            (lambda ()
+;              (turn-off-fci-mode)))
+;  :mode
+;  ("\\.erb\\'"
+;   "\\.html?\\'"))
 
 ;; Haml is a better HTML
-(use-package haml-mode :defer t)
+;(use-package haml-mode :defer t)
 
 
 ;; ###### Ruby #######
@@ -524,81 +516,81 @@
 ;; TODO: https://github.com/purcell/emacs.d/blob/master/lisp/init-ruby-mode.el
 
 ;; Enhanced ruby-mode uses Ripper to parse Ruby instead of regexps
-(use-package enh-ruby-mode
-  :init
-  (setq enh-ruby-bounce-deep-indent t)
-  (setq enh-ruby-hanging-brace-indent-level 2)
-  (setq enh-ruby-use-ruby-mode-show-parens-config t)
-  :config
-  ;; Run all ruby-mode-hooks when using enh-ruby-mode
-  (add-hook 'enh-ruby-mode-hook
-            (lambda ()
-              ;; Unless enh-ruby-mode has decided to inherit from ruby-mode
-              (unless (derived-mode-p 'ruby-mode)
-                (run-hooks 'ruby-mode-hook))
-              ;; Let flycheck handle error highlighting with squiggle underlines
-              (custom-set-faces
-               '(erm-syn-warnline ((t (:underline (:style wave :color "orange")))))
-               '(erm-syn-errline ((t (:underline (:style wave :color "red")))))
-               '(enh-ruby-op-face ((t (:foreground nil :inherit 'default))))
-              )
-            ))
-  :mode
-  ("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
-   "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'")
-  :interpreter "ruby")
+;(use-package enh-ruby-mode
+;  :init
+;  (setq enh-ruby-bounce-deep-indent t)
+;  (setq enh-ruby-hanging-brace-indent-level 2)
+;  (setq enh-ruby-use-ruby-mode-show-parens-config t)
+;  :config
+;  ;; Run all ruby-mode-hooks when using enh-ruby-mode
+;  (add-hook 'enh-ruby-mode-hook
+;            (lambda ()
+;              ;; Unless enh-ruby-mode has decided to inherit from ruby-mode
+;              (unless (derived-mode-p 'ruby-mode)
+;                (run-hooks 'ruby-mode-hook))
+;              ;; Let flycheck handle error highlighting with squiggle underlines
+;              (custom-set-faces
+;               '(erm-syn-warnline ((t (:underline (:style wave :color "orange")))))
+;               '(erm-syn-errline ((t (:underline (:style wave :color "red")))))
+;               '(enh-ruby-op-face ((t (:foreground nil :inherit 'default))))
+;              )
+;            ))
+;  :mode
+;  ("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
+;   "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'")
+;  :interpreter "ruby")
 
 ;; Inferior ruby console - lets you load a Ruby session and send stuff to it
 ;; M-x inf-ruby-console-auto, then C-c C-r to send region to the console
-(use-package inf-ruby
-  :init
-  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
-  :commands inf-ruby-minor-mode
-  :bind
-  (("C-c C-s" . inf-ruby-console-auto)))
+;(use-package inf-ruby
+;  :init
+;  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+;  :commands inf-ruby-minor-mode
+;  :bind
+;  (("C-c C-s" . inf-ruby-console-auto)))
 
 ;; Autocompletion and doc lookup in ruby: https://github.com/dgutov/robe
 ;; Requires "pry" to be in your Gemfile, and M-x robe-start or another
 ;; robe command to be run.
-(use-package robe
-  :init
-  (add-hook 'ruby-mode-hook 'robe-mode)
-  (with-eval-after-load 'company
-    (push 'company-robe company-backends))
-  :diminish robe-mode
-  :commands (robe-mode company-robe)
-  ;;  - M-. to jump to the definition
-  ;;  - M-, to jump back
-  ;;  - C-c C-d to see the documentation
-  ;;  - C-c C-k to refresh Rails environment
-  ;;  - C-M-i to complete the symbol at point
-)
+;(use-package robe
+;  :init
+;  (add-hook 'ruby-mode-hook 'robe-mode)
+;  (with-eval-after-load 'company
+;    (push 'company-robe company-backends))
+;  :diminish robe-mode
+;  :commands (robe-mode company-robe)
+;  ;;  - M-. to jump to the definition
+;  ;;  - M-, to jump back
+;  ;;  - C-c C-d to see the documentation
+;  ;;  - C-c C-k to refresh Rails environment
+;  ;;  - C-M-i to complete the symbol at point
+;)
 
 ;; Projectile integration for Rails project.
 ;; TODO: this conflicts with the inf-ruby shortcuts though
-(use-package projectile-rails
-  :init
-  (add-hook 'projectile-mode-hook 'projectile-rails-on)
-  :commands projectile-rails-on)
+;(use-package projectile-rails
+;  :init
+;  (add-hook 'projectile-mode-hook 'projectile-rails-on)
+;  :commands projectile-rails-on)
 
 ;; Provide a command for switching between old and new hash syntax.
-(use-package ruby-hash-syntax
-  :commands ruby-hash-syntax-toggle)
+;(use-package ruby-hash-syntax
+;  :commands ruby-hash-syntax-toggle)
 
 ;; Support YARD documentation syntax
-(use-package yard-mode
-  :commands yard-mode
-  :diminish yard-mode
-  :init
-  (add-hook 'ruby-mode-hook 'yard-mode))
+;(use-package yard-mode
+;  :commands yard-mode
+;  :diminish yard-mode
+;  :init
+;  (add-hook 'ruby-mode-hook 'yard-mode))
 
 ;; Edit Cucumber features
-(use-package feature-mode
-  :init
-  (add-hook 'feature-mode-hook
-            (lambda ()
-              (guide-key/add-local-guide-key-sequence "C-c ,")))
-  :commands feature-mode)
+;(use-package feature-mode
+;  :init
+;  (add-hook 'feature-mode-hook
+;            (lambda ()
+;              (guide-key/add-local-guide-key-sequence "C-c ,")))
+;  :commands feature-mode)
 ;; Keybinding	Description
 ;; TODO: contribute a discover menu for this?
 ;; C-c ,v	Verify all scenarios in the current buffer file.
@@ -618,8 +610,8 @@
 ;; TODO: https://github.com/skeeto/javadoc-lookup
 ;; TODO: javap mode
 
-(use-package groovy-mode :defer t)
-(use-package gradle-mode :defer t)
+;(use-package groovy-mode :defer t)
+;(use-package gradle-mode :defer t)
 
 
 ;; ###### JavaScript #######
@@ -628,37 +620,17 @@
 ;; TODO: I'd expect company to work here with dabbrev
 
 ;; A better JavaScript mode, with JSX support
-(use-package js2-mode
-  :init
-  (setq js2-skip-preprocessor-directives t) ; Allow shebangs!
-  (setq js-indent-level 2)
-  (setq js2-basic-offset 2)
-  (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS")))
-  :config
-  :mode (("\\.js$" . js2-mode)
-   ("\\.jsx$" . js2-jsx-mode))
-  :interpreter ("node" . js2-mode))
+;(use-package js2-mode
+;  :init
+;  (setq js2-skip-preprocessor-directives t) ; Allow shebangs!
+;  (setq js-indent-level 2)
+;  (setq js2-basic-offset 2)
+;  (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS")))
+;  :config
+;  :mode (("\\.js$" . js2-mode)
+;   ("\\.jsx$" . js2-jsx-mode))
+;  :interpreter ("node" . js2-mode))
 ;; TODO: non-conflicting jump to definition key
-
-;; Tern provides JS autocomplete, function args and other tooling
-;; http://ternjs.net/
-;; Must be installed: npm install -g tern
-(use-package tern
-  :commands tern-mode
-  :diminish tern-mode
-  :init
-  (add-hook 'js2-mode-hook 'tern-mode)
-  )
-;; Tern bindings:
-;; M-. : go to definition
-;; C-c C-r : rename symbol
-
-;; Use tern for autocomplete
-(use-package company-tern
-  :commands company-tern
-  :init
-  (setq company-tern-property-marker " .")
-  (add-to-list 'company-backends 'company-tern))
 
 ;; Run NodeJS in an inferior process window
 (use-package nodejs-repl :defer t)
@@ -667,10 +639,10 @@
 ;; use remap rather than synchronizing everything
 
 ;; Coffeescript is a friendlier JavaScript
-(use-package coffee-mode
-  :defer t
-  :config
-  (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
+;(use-package coffee-mode
+;  :defer t
+;  :config
+;  (define-key coffee-mode-map (kbd "C-c r") 'coffee-compile-region))
 
 
 
@@ -684,14 +656,14 @@
 ;; ###### CSS #######
 
 ;; Sass is a better CSS
-(use-package sass-mode :defer t)
-(use-package scss-mode :defer t)
+;(use-package sass-mode :defer t)
+;(use-package scss-mode :defer t)
 
 ;; Eldoc (inline documentation) support for CSS
-(use-package css-eldoc
-  :commands turn-on-css-eldoc
-  :init
-  (add-hook 'css-mode-hook 'turn-on-css-eldoc))
+;(use-package css-eldoc
+;  :commands turn-on-css-eldoc
+;  :init
+;  (add-hook 'css-mode-hook 'turn-on-css-eldoc))
 
 ;; Colorize color names and #ABCs with their actual colors.
 (use-package rainbow-mode
@@ -713,22 +685,22 @@
 ;; TODO: mess with this stuff once I learn how people like to set up python
 ;; TODO: have to point all this stuff to the Homebrew version of python? need virtualenv?
 ;; TODO: python inferior mode should be cool!
-(use-package python-mode
-  :disabled t
-  :commands python-mode
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :config
-  (use-package anaconda-mode
-    :config
-    (use-package company-anaconda
-      :after company
-      :config
-      (add-to-list 'company-backends 'company-anaconda)))
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (subword-mode +1)
-              (anaconda-mode 1))))
+;(use-package python-mode
+;  :disabled t
+;  :commands python-mode
+;  :mode ("\\.py\\'" . python-mode)
+;  :interpreter ("python" . python-mode)
+;  :config
+;  (use-package anaconda-mode
+;    :config
+;    (use-package company-anaconda
+;      :after company
+;      :config
+;      (add-to-list 'company-backends 'company-anaconda)))
+;  (add-hook 'python-mode-hook
+;            (lambda ()
+;              (subword-mode +1)
+;              (anaconda-mode 1))))
 
 
 ;; ###### C/C++ #######
@@ -740,76 +712,76 @@
 ;; TODO: https://github.com/ahyatt/code-imports
 ;; TODO: https://github.com/syohex/emacs-cpp-auto-include
 
-(defvar c-default-style '((c++-mode . "bsd")
-  (c-mode . "bsd")
-  (java-mode . "java")
-  (other . "gnu")))
+;(defvar c-default-style '((c++-mode . "bsd")
+;  (c-mode . "bsd")
+;  (java-mode . "java")
+;  (other . "gnu")))
 
 
 ;; ###### Obj-C #######
 
 ;; TODO: compile command via xcodebuild
 
-(add-hook 'objc-mode-hook
-          (lambda ()
-            (setq c-basic-offset 4)))
+;(add-hook 'objc-mode-hook
+;          (lambda ()
+;            (setq c-basic-offset 4)))
 
 
 ;; ###### Rust #######
 
 ;; TODO: https://github.com/racer-rust/emacs-racer
 ;; TODO: http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
-(use-package rust-mode :defer t)
+;(use-package rust-mode :defer t)
 
-(use-package cargo
-  :commands cargo-minor-mode
-  :init
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+;(use-package cargo
+;  :commands cargo-minor-mode
+;  :init
+;  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
-(use-package flycheck-rust
-  :commands flycheck-rust-setup
-  :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;(use-package flycheck-rust
+;  :commands flycheck-rust-setup
+;  :init
+;  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-(use-package racer
-  :commands racer-mode
-  :diminish racer-mode
-  :init
-  (setq racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/")
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+;(use-package racer
+;  :commands racer-mode
+;  :diminish racer-mode
+;  :init
+;  (setq racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/")
+;  (add-hook 'rust-mode-hook #'racer-mode)
+;  (add-hook 'racer-mode-hook #'eldoc-mode))
 
 
 ;; ###### Perl #######
 
 ;; I hope I don't have to write Perl anymore...
-(use-package cperl-mode
-  :init
-  (defalias 'perl-mode 'cperl-mode)
-  (setq cperl-continued-statement-offset 4)
-  (setq cperl-indent-level 4)
-  (setq cperl-tab-always-indent t)
-  (setq cperl-indent-parens-as-block t)
-  (setq cperl-close-paren-offset (- cperl-indent-level))
-  (setq cperl-mode-hook
-  '(lambda ()
-     (margin-mode 1)
-     (setq tab-width 4)))
-  :mode ("\\.cgi$" . cperl-mode))
+;(use-package cperl-mode
+;  :init
+;  (defalias 'perl-mode 'cperl-mode)
+;  (setq cperl-continued-statement-offset 4)
+;  (setq cperl-indent-level 4)
+;  (setq cperl-tab-always-indent t)
+;  (setq cperl-indent-parens-as-block t)
+;  (setq cperl-close-paren-offset (- cperl-indent-level))
+;  (setq cperl-mode-hook
+;  '(lambda ()
+;     (margin-mode 1)
+;     (setq tab-width 4)))
+;  :mode ("\\.cgi$" . cperl-mode))
 
 
 ;; ###### Protobuf #######
 
-(use-package protobuf-mode
-  :defer t
-  :config
-  (add-hook 'protobuf-mode-hook
-            (lambda ()
-              ;; Protobuf isn't a programming mode
-              (highlight-todos)
-              (fci-mode)
-              (eldoc-mode)
-              (subword-mode +1))))
+;(use-package protobuf-mode
+;  :defer t
+;  :config
+;  (add-hook 'protobuf-mode-hook
+;            (lambda ()
+;              ;; Protobuf isn't a programming mode
+;              (highlight-todos)
+;              (fci-mode)
+;              (eldoc-mode)
+;              (subword-mode +1))))
 
 
 ;; ###### Shell Scripting #######
