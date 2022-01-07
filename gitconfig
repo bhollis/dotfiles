@@ -1,6 +1,7 @@
 [user]
   name = Ben Hollis
   email = ben@benhollis.net
+  signingkey = E9A92EC0F088817D
 
 [color]
   diff = auto
@@ -56,3 +57,6 @@
 
 [includeIf "gitdir:~/Snapchat/"]
   path = .dotfiles/gitconfig-work
+
+[commit]
+  gpgsign = true
