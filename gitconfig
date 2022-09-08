@@ -20,6 +20,9 @@
 [core]
   autocrlf = input
   excludesFile = ~/.dotfiles/gitignore_global
+  fsmonitor = true
+  untrackedCache = true
+  splitIndex = true
 
 [diff]
   algorithm = histogram
@@ -61,4 +64,4 @@
   path = .dotfiles/gitconfig-work
 
 [commit]
-  gpgsign = true
+  gpgsign = false

@@ -527,7 +527,7 @@ _lp_git_branch_color()
 
         local end
         end="$NO_COL"
-        if LC_ALL=C \git status --porcelain 2>/dev/null | grep -Eq '^\s*[MADRC]'; then
+        if LC_ALL=C \git status -uno --porcelain 2>/dev/null | grep -Eq '^\s*[MADRC]'; then
             end="$LP_COLOR_CHANGES$LP_MARK_UNTRACKED$end"
         fi
 

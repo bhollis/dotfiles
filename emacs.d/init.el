@@ -92,7 +92,7 @@
           magit-mode-hook
           magit-popup-mode-hook))
   ;; Anecdotal GitHub comment says this makes things faster
-  (setq magit-git-executable "/opt/homebrew/bin/git")
+  (setq magit-git-executable "/usr/local/bin/git")
   ;; Turn off auto revert since I use global auto revert mode
   (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
