@@ -1,5 +1,6 @@
 # Mac customization
 alias ls='ls -G -F' #color and slashes/stars
 
-# VSCode on Mac
-export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+# VSCode, Homebrew on Mac
+export PATH="${PATH+:$PATH}:/opt/homebrew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+eval "$(/opt/homebrew/bin/brew shellenv)"
