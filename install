@@ -79,8 +79,8 @@ if [ "$OS" = Darwin ]; then
     brew install git
     brew tap d12frosted/emacs-plus
     brew install emacs-plus --with-nobu417-big-sur-icon
-    ln -s /opt/homebrew/opt/emacs-plus@27/Emacs.app /Applications
-    brew services start d12frosted/emacs-plus/emacs-plus@27
+    ln -s /opt/homebrew/opt/emacs-plus/Emacs.app /Applications
+    brew services start d12frosted/emacs-plus/emacs-plus
 
     # TODO: set up keyboard shortcuts, Terminal preferences
     # TODO: VSCode
