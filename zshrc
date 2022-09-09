@@ -59,8 +59,7 @@ if [ ! -f ~/bin/ec ]; then
     alias ec='emacsclient -a "emacs -nw"' # open in existing emacs, wait for C-x C-#
 fi
 alias e='emacs -nw'
-alias ack='/usr/local/bin/rg'
-alias rg='/usr/local/bin/rg'
+alias ack='rg'
 alias k='kubectl'
 
 ########################### prompt ###################################
