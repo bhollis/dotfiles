@@ -21,8 +21,7 @@
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-;; TODO: melpa-stable instead of melpa?? melpa is "HEAD" versions
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package': https://github.com/jwiegley/use-package
@@ -178,7 +177,7 @@
 (use-package helm-ag
   :defer t
   :init
-  (setq helm-ag-base-command "/usr/local/bin/rg --smart-case --vimgrep --no-heading")
+  (setq helm-ag-base-command "/opt/homebrew/bin/rg --smart-case --vimgrep --no-heading")
   :bind
   (("C-x a" . helm-do-ag-project-root)
    ("C-x A" . helm-do-ag)
