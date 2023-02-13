@@ -486,10 +486,10 @@
 ;;(use-package crontab-mode
 ;;  :mode ("\\.cron\\(tab\\)?\\'" "cron\\(tab\\)?\\."))
 ;(use-package php-mode :defer t)
-;(use-package yaml-mode :defer t)
+(use-package yaml-mode :defer t)
 ;(use-package csharp-mode :defer t)
-;(use-package markdown-mode :defer t)
-;(use-package apache-mode :defer t)
+(use-package markdown-mode :defer t)
+(use-package apache-mode :defer t)
 
 
 ;; ###### Web, templating #######
