@@ -1,27 +1,29 @@
 # Mac customization
-alias ls='ls -G -F' #color and slashes/stars
+alias ls='ls -G -F' # color and slashes/stars
+
+# For Mac systems, we'll manage a lot of things via homebrew
+BREW_PREFIX=$(brew --prefix)
 
 # VSCode, Homebrew on Mac
-export PATH="${PATH+:$PATH}:/opt/homebrew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# HOMEBREW_PREFIX, HOMEBREW_CELLAR, adds to path
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+
+# Add "code" command to path
+export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
 # Homebrew Golang
 export GOPATH=$HOME/go
-if [ -d "$HOME/Snapchat/dev" ]; then
-    export GOPATH=$HOME/Snapchat/dev/go
-fi
-export GOROOT=/opt/homebrew/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 # Homebrew java + jenv
-if [ -d /opt/homebrew/Cellar/jenv ]; then
+if [ -d "${HOMEBREW_PREFIX}/Cellar/jenv" ]; then
     export PATH="$HOME/.jenv/shims:${PATH}"
     export JENV_SHELL=zsh
     export JENV_LOADED=1
     unset JAVA_HOME
     unset JDK_HOME
-    source '/opt/homebrew/Cellar/jenv/0.5.5_2/libexec/libexec/../completions/jenv.zsh'
+    source "${HOMEBREW_CELLAR}/jenv/0.5.5_2/libexec/libexec/../completions/jenv.zsh"
     jenv rehash 2>/dev/null
     jenv refresh-plugins
     jenv() {
@@ -39,3 +41,10 @@ if [ -d /opt/homebrew/Cellar/jenv ]; then
         esac
     }
 fi
+
+# Homebrew Ruby
+export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
+
+# Google Cloud SDK (gcloud) - brew install google-cloud-sdk
+source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/path.zsh.inc"
+source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"

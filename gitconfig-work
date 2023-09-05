@@ -1,8 +1,2 @@
 [user]
-  name = Benjamin Hollis
-  email = benjamin.hollis@snapchat.com
-
-[url "git@github.sc-corp.net:"]
-        insteadOf = https://github.sc-corp.net/
-        insteadOf = ssh://github.sc-corp.net/
-        insteadOf = ssh://git@github.sc-corp.net/
+  email = hollis@stately.cloud
