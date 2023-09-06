@@ -1,12 +1,9 @@
 # Mac customization
 alias ls='ls -G -F' # color and slashes/stars
 
-# For Mac systems, we'll manage a lot of things via homebrew
-BREW_PREFIX=$(brew --prefix)
-
-# VSCode, Homebrew on Mac
+# Homebrew on Mac
 # HOMEBREW_PREFIX, HOMEBREW_CELLAR, adds to path
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Add "code" command to path
 export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
