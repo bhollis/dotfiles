@@ -63,8 +63,7 @@ if [ "$OS" = Darwin ]; then
     which brew || eval "$(/opt/homebrew/bin/brew shellenv)"
     brew doctor || echo "Pay attention to these errors!"
     brew update
-    which node || brew install node
-    which rg || brew install ripgrep
+    brew bundle install --file ~/dotfiles/Brewfile
 
     # https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
     if type "gpg" > /dev/null; then
@@ -74,16 +73,8 @@ if [ "$OS" = Darwin ]; then
         # echo "test" | gpg --clearsign
     fi
 
-    which shellcheck || brew install shellcheck
-    # replace the builtin git
-    brew install git
-    brew tap d12frosted/emacs-plus
-    brew install emacs-plus --with-nobu417-big-sur-icon
     ln -sf /opt/homebrew/opt/emacs-plus/Emacs.app /Applications
-    brew services start d12frosted/emacs-plus/emacs-plus
-
     # TODO: set up keyboard shortcuts, Terminal preferences
-    # TODO: VSCode
 
     defaults write com.apple.screencapture location ~/Pictures/Screenshots
 fi
