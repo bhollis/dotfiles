@@ -104,7 +104,7 @@
   (defun magit-popup-mode-display-buffer--split-window-sensibly (fn buffer mode)
     (let ((split-window-preferred-function 'split-window-sensibly))
       (funcall fn buffer mode)))
-  (global-magit-file-mode)
+  ;(global-magit-file-mode)
   :bind
   (("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch)))
@@ -124,7 +124,7 @@
   (when (executable-find "curl")
     (setq-default helm-net-prefer-curl t))
   :config
-  (require 'helm-config)
+  ;(require 'helm-config)
   (define-key helm-map (kbd "C-]") 'helm-keyboard-quit)
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action (open, etc)
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal

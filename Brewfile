@@ -21,7 +21,7 @@ brew "node"
 brew "ripgrep"
 brew "shellcheck"
 brew "yarn"
-brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-nobu417-big-sur-icon"], restart_service: true, link: true
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-nobu417-big-sur-icon"], restart_service: true, link: true
 brew "getsentry/tools/sentry-cli"
 
 cask "blender" if home
