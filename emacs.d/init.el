@@ -75,7 +75,7 @@
 (use-package fill-column-indicator
   :commands fci-mode
   :init
-  (setq-default fci-rule-column 79)
+  (setq-default fci-rule-column 99)
   (add-hook 'prog-mode-hook 'fci-mode))
 
 ;; Do all your git tasks from emacs. Never use git CLI again.
@@ -96,7 +96,6 @@
   (setq magit-completing-read-function 'helm--completing-read-default)
   (setq magit-branch-prefer-remote-upstream '("master"))
   (setq magit-list-refs-sortby "-committerdate")
-  ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
   (advice-add 'magit-popup-mode-display-buffer :around
@@ -104,10 +103,31 @@
   (defun magit-popup-mode-display-buffer--split-window-sensibly (fn buffer mode)
     (let ((split-window-preferred-function 'split-window-sensibly))
       (funcall fn buffer mode)))
-  ;(global-magit-file-mode)
   :bind
   (("C-x g" . magit-status)
   ("C-x M-g" . magit-dispatch)))
+
+;; Set the files that are searched for writing tokens
+;; by default ~/.authinfo will be used
+;; This is neede for forge
+(setq auth-sources '("~/.authinfo.gpg"))
+
+;; Forge adds GitHub support to Magit
+(use-package forge
+  :after magit)
+
+;; Command to open a new pull request in the browser. Nicer than doing it through forge IMO.
+(defun create-pull-request ()
+  "Creates a new pull request"
+  (interactive)
+  (async-shell-command
+   ;; command and parameters
+   "git pr"
+   ;; output buffer
+   "*PR Output*"
+   ;; name of the error buffer
+   "*PR Errors*"
+   ))
 
 ;; Helm is a crazy search interface that replaces ido: http://tuhdo.github.io/helm-intro.html
 ;; An important thing to remember is that helm finds stuff *first*, then decides what to do!

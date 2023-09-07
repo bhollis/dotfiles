@@ -65,3 +65,5 @@
 
 [commit]
   gpgsign = false
+[github]
+	user = bhollis

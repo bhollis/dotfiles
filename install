@@ -78,3 +78,8 @@ if [ "$OS" = Darwin ]; then
 
     defaults write com.apple.screencapture location ~/Pictures/Screenshots
 fi
+
+# Log in to github and push SSH key
+if type "gh" > /dev/null; then
+    gh auth login
+fi
