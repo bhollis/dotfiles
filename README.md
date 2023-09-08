@@ -10,6 +10,10 @@ Don't try to use this directly - instead, browse through it and see if there's a
 # Install
 
 1. Clone this repo into `~`
-2. Make sure your shell is `zsh`
+2. Make sure your shell is `zsh`: `chsh -s /bin/zsh`
+3. Install Homebrew:
+  * `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+  * `eval "$(/opt/homebrew/bin/brew shellenv)"
+4. `cd dotfiles`
 3. Run `dotfiles/install`. Probably a few times.
 4. Install the Hack fonts. Prefer OTF over TTF.

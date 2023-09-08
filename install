@@ -76,7 +76,7 @@ if [ "$OS" = Darwin ]; then
     ln -sf /opt/homebrew/opt/emacs-plus/Emacs.app /Applications
     # TODO: set up keyboard shortcuts, Terminal preferences
 
-    defaults write com.apple.screencapture location ~/Pictures/Screenshots
+    ./setup-macos
 fi
 
 # Log in to github and push SSH key

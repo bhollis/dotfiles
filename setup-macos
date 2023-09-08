@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh -r -x -v -e
+
+# Set macOS preferences
+# See https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
+
+# Set screenshots location
+mkdir -f ~/Pictures/Screenshots
+defaults write com.apple.screencapture location ~/Pictures/Screenshots
+
+# Auto hide the dock
+defaults write com.apple.dock autohide -bool true
+
+# Windows & Apps > Prefer tabs when opening documents
+defaults write -globalDomain AppleWindowTabbingMode -string "always"
+
+# Mission Controll > Automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Key repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 2
+
+# Delay until repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Txt Input > Correct spelling automatically
+defaults write -globalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Txt Input > Capitalise words automatically
+defaults write -globalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Txt Input > Add full stop with double-space
+defaults write -globalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
