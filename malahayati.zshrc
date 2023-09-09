@@ -1,0 +1,1 @@
+hash -d d=~/Documents/
