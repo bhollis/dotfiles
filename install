@@ -52,8 +52,6 @@ rm -f ~/*(-@D) || echo "No broken symlinks in ~"
 # if Mac, suppress login thing
 touch ~/.hushlogin
 
-# on mac, write prefs? customizations.txt? Brewfile?
-
 # Update submodules
 git submodule update --init --recursive
 
@@ -64,14 +62,6 @@ if [ "$OS" = Darwin ]; then
     brew doctor || echo "Pay attention to these errors!"
     brew update
     brew bundle install --file ~/dotfiles/Brewfile
-
-    # https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
-    if type "gpg" > /dev/null; then
-        brew install gnupg
-        brew install pinentry-mac
-        echo "pinentry-program /opt/homebrew/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
-        # echo "test" | gpg --clearsign
-    fi
 
     ln -sf /opt/homebrew/opt/emacs-plus/Emacs.app /Applications
     # TODO: set up keyboard shortcuts, Terminal preferences

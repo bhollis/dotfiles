@@ -1,7 +1,6 @@
 [user]
   name = Ben Hollis
   email = ben@benhollis.net
-  signingkey = E9A92EC0F088817D
 
 [color]
   diff = auto
@@ -38,10 +37,6 @@
   p = pull --rebase
   merged = branch --merged
 
-# Credentials live elsewhere
-[include]
-    path = ~/.gitconfig.github
-
 [rerere]
   enabled = true
 
@@ -63,7 +58,5 @@
 [includeIf "gitdir:~/Documents/Stately/"]
   path = dotfiles/gitconfig-work
 
-[commit]
-  gpgsign = false
 [github]
-	user = bhollis
+  user = bhollis
