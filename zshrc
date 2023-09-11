@@ -1,4 +1,5 @@
 # TODO: Warning (emacs): You appear to be setting environment variables in your .bashrc or .zshrc: those files are only read by interactive shells, so you should instead set environment variables in startup files like .bash_profile or .zshenv.  See the man page for your shell for more info.  In future, exec-path-from-shell will not read variables set in the wrong files.
+# -*- mode: zsh -*-
 # zsh startup
 
 # source profile like .bashrc
@@ -70,11 +71,7 @@ source ~/dotfiles/spectrum.zsh # COLORS! Run spectrum_ls to see them, FG[int], B
 ###################### environment variables #########################
 export LESS='-FRiX' # quit if one screen, color, case insensitive searching
 export PAGER=less
-export EDITOR='ec'
-export PATH=~/bin:$PATH:/usr/local/share/npm/bin:~/.cargo/bin
-export GTAGSLABEL='ctags'
 export GPG_TTY=$(tty)
-
 
 #################### coloring matters ########################
 # Color codes: 00;{30,31,32,33,34,35,36,37} and 01;{30,31,32,33,34,35,36,37}
@@ -136,13 +133,13 @@ esac
 
 #################### load additional zshrc files #####################
 
-# Load a platform-specific zshrc, such as .Darwin.zshrc
+# Load a platform-specific zshrc, such as Darwin.zshrc
 platform=`uname`
 if [ -f ~/dotfiles/$platform.zshrc ]; then
     source ~/dotfiles/$platform.zshrc
 fi
 
-# Host-specific zshrc, such as .legion.zshrc
+# Host-specific zshrc, such as legion.zshrc
 SHORTHOST=${HOST/\.local/}
 if [ -f ~/dotfiles/$SHORTHOST.zshrc ]; then
     source ~/dotfiles/$SHORTHOST.zshrc
@@ -153,10 +150,6 @@ if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
 
-############################ rvm #####################################
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
 [[ $- = *i* ]] && prompt_on
 
 # kubectl completions
@@ -164,5 +157,4 @@ if type "kubectl" > /dev/null; then
   source <(kubectl completion zsh)
 fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+

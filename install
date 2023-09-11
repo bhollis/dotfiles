@@ -31,6 +31,7 @@ ln -s -F "$DOTFILES_PATH/emacs.d" ~/.emacs.d
 ln -s -f "$DOTFILES_PATH/gemrc" ~/.gemrc
 ln -s -f "$DOTFILES_PATH/gitconfig" ~/.gitconfig
 ln -s -f "$DOTFILES_PATH/zshrc" ~/.zshrc
+ln -s -f "$DOTFILES_PATH/zshenv" ~/.zshenv
 mkdir -p ~/bin
 ln -s -f "$DOTFILES_PATH"/bin/* ~/bin
 
@@ -67,6 +68,9 @@ if [ "$OS" = Darwin ]; then
     # TODO: set up keyboard shortcuts, Terminal preferences
 
     ./setup-macos
+
+    # Please stop me from committing AWS keys
+    git secrets --install -f
 fi
 
 # Log in to github and push SSH key

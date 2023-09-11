@@ -1,17 +1,8 @@
 # Mac customization
 alias ls='ls -G -F' # color and slashes/stars
 
-# Homebrew on Mac
-# HOMEBREW_PREFIX, HOMEBREW_CELLAR, adds to path
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Add "code" command to path
 export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-
-# Homebrew Golang
-export GOPATH=$HOME/go
-export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 # Homebrew java + jenv
 if [ -d "${HOMEBREW_PREFIX}/Cellar/jenv" ]; then
@@ -39,9 +30,10 @@ if [ -d "${HOMEBREW_PREFIX}/Cellar/jenv" ]; then
     }
 fi
 
-# Homebrew Ruby
-export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
-
 # Google Cloud SDK (gcloud) - brew install google-cloud-sdk
-source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/path.zsh.inc"
 source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
+
+# NVM - Node Version Manager
+if [ -d "${HOMEBREW_PREFIX}/opt/nvm" ]; then
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+fi

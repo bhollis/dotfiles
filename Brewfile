@@ -1,32 +1,38 @@
 require 'socket'
 hostname = Socket.gethostname
 
+# Is this my home laptop?
 home = hostname.include? 'felwinter'
+# Or my work laptop?
+work = hostname.include? 'malahayati'
 
 tap "d12frosted/emacs-plus"
-tap "getsentry/tools"
+tap "getsentry/tools" # Sentry.io tools
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "homebrew/cask-fonts"
 
 
-brew "mas"
+brew "mas" # Mac App Store CLI
 brew "awscli"
-brew "ruby"
-brew "doctl"
+brew "ruby" # TODO: Maybe RVM
+brew "doctl" # DigitalOcean
 brew "ffmpeg"
 brew "git"
 brew "git-secrets"
 brew "imagemagick"
 brew "librsvg"
-brew "node"
+brew "nvm"
 brew "ripgrep"
 brew "shellcheck"
 brew "yarn"
 brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-nobu417-big-sur-icon"], restart_service: true, link: true
 brew "getsentry/tools/sentry-cli"
-brew "gh"
-brew "hack"
+brew "gh" # GitHub CLI
+brew "kubectl"
+brew "protobuf" if work
+brew "rustup-init" if work # Run "rustup-init" after this
+brew "golang" if work
 
 cask "blender" if home
 cask "google-cloud-sdk"
@@ -37,8 +43,10 @@ cask "bettertouchtool"
 cask "scroll-reverser"
 cask "zoom"
 cask "vivaldi"
-cask "slack"
 cask "discord"
+cask "spotify"
+cask "font-hack" # My favorite coding font
+cask "docker" # Docker Desktop for Mac - not sure what the formula is
 
 vscode "amodio.tsl-problem-matcher"
 vscode "bierner.markdown-yaml-preamble"
@@ -73,5 +81,6 @@ mas "Affinity Designer", id: 824171161
 mas "Slack", id: 803453959
 mas "Tailscale", id: 1475387142
 mas "The Unarchiver", id: 425424353
+# Adblocking for Safari
 mas "1Blocker", id: 1365531024
 mas "Hush", id: 1544743900

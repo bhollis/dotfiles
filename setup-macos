@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh -r -x -v -e
+# -*- mode: zsh -*-
 
 # Set macOS preferences
 # See https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
