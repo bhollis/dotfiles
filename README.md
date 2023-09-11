@@ -17,3 +17,5 @@ Don't try to use this directly - instead, browse through it and see if there's a
     * `eval "$(/opt/homebrew/bin/brew shellenv)"
 4. `cd dotfiles`
 3. Run `dotfiles/install`. You'll probably need to restart your machine after the first time and run it a few more times before it all takes.
+4. If you haven't already, run `gh auth login` to create and upload an SSH key.
+5. Don't forget to [set up the SSH agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).

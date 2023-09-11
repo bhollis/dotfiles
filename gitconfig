@@ -57,6 +57,10 @@
 
 [includeIf "gitdir:~/Documents/Stately/"]
   path = dotfiles/gitconfig-work
+[includeIf "hasconfig:remote.*.url:git@github.com:StatelyCloud/**"]
+  path = dotfiles/gitconfig-work
+[includeIf "hasconfig:remote.*.url:https://github.com:StatelyCloud/**"]
+  path = dotfiles/gitconfig-work
 
 [github]
   user = bhollis
