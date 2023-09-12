@@ -62,7 +62,7 @@ if [ "$OS" = Darwin ]; then
     which brew || eval "$(/opt/homebrew/bin/brew shellenv)"
     brew doctor || echo "Pay attention to these errors!"
     brew update
-    brew bundle install --file ~/dotfiles/Brewfile
+    brew bundle install --file ~/dotfiles/Brewfile || echo "Not all brew dependencies were installed"
 
     ln -sf /opt/homebrew/opt/emacs-plus/Emacs.app /Applications
     # TODO: set up keyboard shortcuts, Terminal preferences
