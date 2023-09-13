@@ -55,8 +55,6 @@
   clean = git-lfs clean -- %f
   process = git-lfs filter-process
 
-[includeIf "gitdir:~/Documents/Stately/"]
-  path = dotfiles/gitconfig-work
 [includeIf "hasconfig:remote.*.url:git@github.com:StatelyCloud/**"]
   path = dotfiles/gitconfig-work
 [includeIf "hasconfig:remote.*.url:https://github.com:StatelyCloud/**"]

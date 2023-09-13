@@ -55,15 +55,15 @@
 ;; :bind, :defer, :commands, :mode, :interpreter all cause lazy loading.
 
 ;; Get PATH from shell on OSX, for when we launched from the dock
-(use-package exec-path-from-shell
-  :if is-mac
-  :config
-  ;; Don't whine about my environment
-  (setq-default exec-path-from-shell-check-startup-file nil)
-  (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
-  (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
-  (add-to-list 'exec-path-from-shell-variables "PYTHONPATH")
-  (exec-path-from-shell-initialize))
+;(use-package exec-path-from-shell
+;  :if is-mac
+;  :config
+;  ;; Don't whine about my environment
+;  (setq-default exec-path-from-shell-check-startup-file nil)
+;  (add-to-list 'exec-path-from-shell-variables "GEM_PATH")
+;  (add-to-list 'exec-path-from-shell-variables "GEM_HOME")
+;  (add-to-list 'exec-path-from-shell-variables "PYTHONPATH")
+;  (exec-path-from-shell-initialize))
 
 ;; package.el will automatically create and require autoloads files
 ;; for packages. Many of these have package autoloads that
@@ -94,7 +94,7 @@
   ;; Turn off auto revert since I use global auto revert mode
   (setq magit-auto-revert-mode nil)
   (setq magit-completing-read-function 'helm--completing-read-default)
-  (setq magit-branch-prefer-remote-upstream '("master"))
+  (setq magit-branch-prefer-remote-upstream '("master" "main"))
   (setq magit-list-refs-sortby "-committerdate")
   (add-hook 'git-commit-mode-hook 'comment-auto-fill)
   :config
