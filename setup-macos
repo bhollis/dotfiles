@@ -5,7 +5,7 @@
 # See https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
 
 # Set screenshots location
-mkdir -f ~/Pictures/Screenshots
+mkdir -p ~/Pictures/Screenshots
 defaults write com.apple.screencapture location ~/Pictures/Screenshots
 
 # Auto hide the dock
