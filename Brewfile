@@ -47,6 +47,7 @@ cask "discord"
 cask "spotify"
 cask "font-hack" # My favorite coding font
 cask "docker" # Docker Desktop for Mac - not sure what the formula is
+cask "imageoptim"
 
 vscode "amodio.tsl-problem-matcher"
 vscode "bierner.markdown-yaml-preamble"
