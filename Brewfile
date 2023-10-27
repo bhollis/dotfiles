@@ -12,7 +12,6 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 tap "homebrew/cask-fonts"
 
-
 brew "mas" # Mac App Store CLI
 brew "awscli"
 brew "ruby" # TODO: Maybe RVM
@@ -23,9 +22,9 @@ brew "git-secrets"
 brew "imagemagick"
 brew "librsvg"
 brew "nvm"
+brew "corepack"
 brew "ripgrep"
 brew "shellcheck"
-brew "yarn"
 brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-nobu417-big-sur-icon"], restart_service: true, link: true
 brew "getsentry/tools/sentry-cli"
 brew "gh" # GitHub CLI
