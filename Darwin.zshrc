@@ -1,6 +1,8 @@
 # Mac customization
 alias ls='ls -G -F' # color and slashes/stars
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Add "code" command to path
 export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
@@ -35,5 +37,10 @@ source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
 
 # NVM - Node Version Manager
 if [ -d "${HOMEBREW_PREFIX}/opt/nvm" ]; then
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    [ -s "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
+
+# This goes here instead of zshenv because macos adds its own paths in front!
+# Homebrew Ruby
+#export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
+eval "$(rbenv init - zsh)"

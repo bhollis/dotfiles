@@ -7,9 +7,6 @@ export GOPATH=$HOME/go
 export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
-# Homebrew Ruby
-export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
-
 # Google Cloud SDK (gcloud) - brew install google-cloud-sdk
 source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/path.zsh.inc"
 
@@ -18,3 +15,6 @@ if [ -d "${HOMEBREW_PREFIX}/opt/nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && \. "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"  # This loads nvm
 fi
+
+# Homebrew Ruby
+export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
