@@ -3,6 +3,9 @@ alias ls='ls -G -F' # color and slashes/stars
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Add completions. Should be called before compinit.
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+
 # Add "code" command to path
 export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
@@ -44,3 +47,6 @@ fi
 # Homebrew Ruby
 #export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
 eval "$(rbenv init - zsh)"
+
+
+

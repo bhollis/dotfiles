@@ -109,9 +109,6 @@ zstyle ':completion:*' use-compctl true
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
-autoload -U compinit
-compinit
-
 ####################### terminal/screen/tmux titles ##################
 # if you are at a zsh prompt, make your screen title your current directory
 case $TERM in
@@ -157,4 +154,5 @@ if type "kubectl" > /dev/null; then
   source <(kubectl completion zsh)
 fi
 
-
+autoload -U compinit
+compinit
