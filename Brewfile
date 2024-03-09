@@ -44,7 +44,8 @@ cask "zoom"
 cask "vivaldi"
 cask "discord"
 cask "spotify"
-cask "font-hack" # My favorite coding font
+cask "font-hack" # My old favorite coding font
+casl "font-monaspace" # My new favorite coding font
 cask "docker" # Docker Desktop for Mac - not sure what the formula is
 cask "imageoptim"
 cask "notion" if work

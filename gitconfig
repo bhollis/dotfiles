@@ -21,7 +21,6 @@
   excludesFile = ~/.dotfiles/gitignore_global
   fsmonitor = true
   untrackedCache = true
-  splitIndex = true
 
 [diff]
   algorithm = histogram

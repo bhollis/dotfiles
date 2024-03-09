@@ -7,7 +7,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
 # Add "code" command to path
-export PATH="${PATH+:$PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
 # Homebrew java + jenv
 if [ -d "${HOMEBREW_PREFIX}/Cellar/jenv" ]; then
@@ -46,7 +46,6 @@ fi
 # This goes here instead of zshenv because macos adds its own paths in front!
 # Homebrew Ruby
 #export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
-eval "$(rbenv init - zsh)"
-
-
-
+if type "rbenv" > /dev/null; then
+    eval "$(rbenv init - zsh)"
+fi
