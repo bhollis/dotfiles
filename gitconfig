@@ -61,3 +61,5 @@
 
 [github]
   user = bhollis
+[init]
+	defaultBranch = main

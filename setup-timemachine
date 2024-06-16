@@ -1,0 +1,36 @@
+#!/bin/bash
+# -*- mode: bash -*-
+
+# Adds paths to the Time Machine exclusion list.
+
+# Requires giving terminal "full disk access" and running as sudo
+USER=$(logname)
+
+tmutil addexclusion -p "~$USER/.android",
+tmutil addexclusion -p "~$USER/.bundle",
+tmutil addexclusion -p "~$USER/.cache",
+tmutil addexclusion -p "~$USER/.gem",
+tmutil addexclusion -p "~$USER/.gradle",
+tmutil addexclusion -p "~$USER/.local",
+tmutil addexclusion -p "~$USER/.npm"
+tmutil addexclusion -p "~$USER/.nvm",
+tmutil addexclusion -p "~$USER/.rvm",
+tmutil addexclusion -p "~$USER/.vscode/extensions",
+tmutil addexclusion -p "~$USER/Dropbox",
+tmutil addexclusion -p "~$USER/Library/Application Support/Adobe",
+tmutil addexclusion -p "~$USER/Library/Application Support/Autodesk",
+tmutil addexclusion -p "~$USER/Library/Application Support/Blender",
+tmutil addexclusion -p "~$USER/Library/Application Support/Caches",
+tmutil addexclusion -p "~$USER/Library/Application Support/com.apple.spotlight",
+tmutil addexclusion -p "~$USER/Library/Application Support/discord",
+tmutil addexclusion -p "~$USER/Library/Application Support/Docker Desktop",
+tmutil addexclusion -p "~$USER/Library/Application Support/Epic",
+tmutil addexclusion -p "~$USER/Library/Application Support/Fusion 360",
+tmutil addexclusion -p "~$USER/Library/Application Support/Google",
+tmutil addexclusion -p "~$USER/Library/Application Support/Spotify/PersistentCache",
+tmutil addexclusion -p "~$USER/Library/Application Support/Steam",
+tmutil addexclusion -p "~$USER/Library/Application Support/Vivaldi",
+tmutil addexclusion -p "~$USER/Library/Application Support/zoom.us",
+tmutil addexclusion -p "~$USER/Library/Caches",
+tmutil addexclusion -p "~$USER/Library/Logs",
+tmutil addexclusion -p "~$USER/Library/pnpm",
