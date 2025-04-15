@@ -41,11 +41,18 @@ source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
 # NVM - Node Version Manager
 if [ -d "${HOMEBREW_PREFIX}/opt/nvm" ]; then
     [ -s "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm" ] && \. "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && \. "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"  # This loads nvm
 fi
 
+# Ruby
 # This goes here instead of zshenv because macos adds its own paths in front!
-# Homebrew Ruby
 #export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin":$PATH
 if type "rbenv" > /dev/null; then
     eval "$(rbenv init - zsh)"
+fi
+
+# mise-en-place
+if type "mise" > /dev/null; then
+    eval "$(mise activate zsh)"
 fi

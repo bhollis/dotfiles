@@ -59,6 +59,9 @@
 [includeIf "hasconfig:remote.*.url:https://github.com:StatelyCloud/**"]
   path = dotfiles/gitconfig-work
 
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
 [github]
   user = bhollis
 [init]

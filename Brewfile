@@ -15,8 +15,7 @@ tap "homebrew/cask-fonts"
 brew "mas" # Mac App Store CLI
 brew "awscli"
 brew "ruby" # TODO: Maybe RVM
-brew "doctl" # DigitalOcean
-brew "ffmpeg"
+brew "doctl" if home # DigitalOcean
 brew "git"
 brew "git-secrets"
 brew "imagemagick"
@@ -34,7 +33,7 @@ brew "rustup-init" if work # Run "rustup-init" after this
 brew "golang" if work
 
 cask "blender" if home
-cask "google-cloud-sdk"
+cask "google-cloud-sdk" if work
 cask "ultimaker-cura" if home
 cask "lycheeslicer" if home
 cask "macdown"
@@ -44,7 +43,7 @@ cask "zoom"
 cask "vivaldi"
 cask "discord"
 cask "spotify"
-cask "font-hack" # My old favorite coding font
+# cask "font-hack" # My old favorite coding font
 cask "font-monaspace" # My new favorite coding font
 cask "docker" # Docker Desktop for Mac - not sure what the formula is
 cask "imageoptim"
