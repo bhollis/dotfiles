@@ -1,3 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+default_branch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
 
 git branch --merged | grep -v "\*" | grep -v "^\s*\(master\|main\)$" | xargs -n 1 git branch -d
+
+git checkout -q "$default_branch" && git for-each-ref refs/heads/ "--format=%(refname:short)" | \
+        while read -r branch; do \
+        mergeBase=$(git merge-base "$default_branch" "$branch") && \
+                [[ $(git cherry "$default_branch" $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]] && git branch -D "$branch"; done
