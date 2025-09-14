@@ -154,5 +154,9 @@ if type "kubectl" > /dev/null; then
   source <(kubectl completion zsh)
 fi
 
+if type "stately" > /dev/null; then
+  source <(stately completion zsh)
+fi
+
 autoload -U compinit
 compinit

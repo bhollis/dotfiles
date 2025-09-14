@@ -112,10 +112,6 @@
 ;; This is neede for forge
 (setq auth-sources '("~/.authinfo.gpg"))
 
-;; Forge adds GitHub support to Magit
-(use-package forge
-  :after magit)
-
 ;; Command to open a new pull request in the browser. Nicer than doing it through forge IMO.
 (defun create-pull-request ()
   "Creates a new pull request"
