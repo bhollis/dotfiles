@@ -34,3 +34,7 @@ defaults write -globalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 # Allow terminal to be excempted from XProtect, which makes compiled binaries (e.g. Go tests) run faster
 sudo spctl developer-mode enable-terminal
+
+# Skip Gatekeeper for QLMarkdown
+xattr -r -d com.apple.quarantine /Applications/QLMarkdown.app
+

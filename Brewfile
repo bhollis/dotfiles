@@ -48,6 +48,8 @@ cask "font-monaspace" # My new favorite coding font
 cask "docker" # Docker Desktop for Mac - not sure what the formula is
 cask "imageoptim"
 cask "notion" if work
+cask "qlmarkdown"
+cask "qlvideo"
 
 vscode "amodio.tsl-problem-matcher"
 vscode "bierner.markdown-yaml-preamble"
