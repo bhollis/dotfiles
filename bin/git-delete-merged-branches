@@ -6,5 +6,10 @@ git branch --merged | grep -v "\*" | grep -v "^[\s+*]*\(master\|main\)$" | xargs
 
 git checkout -q "$default_branch" && git for-each-ref refs/heads/ "--format=%(refname:short)" | \
         while read -r branch; do \
+        # Skip if branch is used by a worktree
+        if git worktree list --porcelain | grep -q "branch refs/heads/$branch"; then
+                echo "Skipping branch '$branch' (used by worktree)"
+                continue
+        fi
         mergeBase=$(git merge-base "$default_branch" "$branch") && \
-                [[ $(git cherry "$default_branch" $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]] && git branch -D "$branch"; done
+                [[ $(git cherry "$default_branch" $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]] && git branch -D "$branch" || echo "No cherry $branch"; done
