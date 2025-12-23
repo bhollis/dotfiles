@@ -14,7 +14,7 @@ Don't try to use this directly - instead, browse through it and see if there's a
 2. Make sure your shell is `zsh`: `chsh -s /bin/zsh`
 3. Install Homebrew:
     * `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-    * `eval "$(/opt/homebrew/bin/brew shellenv)"
+    * `eval "$(/opt/homebrew/bin/brew shellenv)"`
 4. `cd dotfiles`
 3. Run `dotfiles/install`. You'll probably need to restart your machine after the first time and run it a few more times before it all takes.
 4. If you haven't already, run `gh auth login` to create and upload an SSH key.
