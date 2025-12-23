@@ -55,9 +55,13 @@
   process = git-lfs filter-process
 
 [includeIf "hasconfig:remote.*.url:git@github.com:StatelyCloud/**"]
-  path = dotfiles/gitconfig-work
+  path = dotfiles/gitconfig-stately
 [includeIf "hasconfig:remote.*.url:https://github.com:StatelyCloud/**"]
-  path = dotfiles/gitconfig-work
+  path = dotfiles/gitconfig-stately
+[includeIf "hasconfig:remote.*.url:git@github.com:databricks-*/**"]
+  path = dotfiles/gitconfig-db
+[includeIf "hasconfig:remote.*.url:git@github.com:databricks-*/**"]
+  path = dotfiles/gitconfig-db
 
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
@@ -65,4 +69,4 @@
 [github]
   user = bhollis
 [init]
-	defaultBranch = main
+  defaultBranch = main

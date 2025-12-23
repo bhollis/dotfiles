@@ -830,8 +830,8 @@
 (setq select-enable-clipboard t)
 
 ;; Default font
-(add-to-list 'default-frame-alist '(font .  "Hack-13" ))
-(set-face-attribute 'default t :font "Hack-13" )
+(add-to-list 'default-frame-alist '(font .  "Monaspace Neon-13" ))
+(set-face-attribute 'default t :font "Monaspace Neon-13" )
 (set-face-attribute 'default t :height 100 )
 
 ;; Save open buffers between sessions

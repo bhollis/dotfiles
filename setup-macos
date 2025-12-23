@@ -4,6 +4,9 @@
 # Set macOS preferences
 # See https://github.com/pawelgrzybek/dotfiles/blob/master/setup-macos.sh
 
+# Enable Touch ID for sudo
+sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
+
 # Set screenshots location
 mkdir -p ~/Pictures/Screenshots
 defaults write com.apple.screencapture location ~/Pictures/Screenshots

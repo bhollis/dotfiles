@@ -36,7 +36,9 @@ if [ -d "${HOMEBREW_PREFIX}/Cellar/jenv" ]; then
 fi
 
 # Google Cloud SDK (gcloud) - brew install google-cloud-sdk
-source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
+if [ -d "${HOMEBREW_PREFIX}/share/google-cloud-sdk" ]; then
+    source "${HOMEBREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
+fi
 
 # NVM - Node Version Manager
 if [ -d "${HOMEBREW_PREFIX}/opt/nvm" ]; then
